@@ -67,14 +67,3 @@ const Button = styled.button`
     border: none;
     cursor: pointer;
 `;
-const Image = styled.img`
-    width: 32px;
-`;
-const Label = styled.label`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #8da4f1;
-    font-size: 12px;
-    cursor: pointer;
-`;

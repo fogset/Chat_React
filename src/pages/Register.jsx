@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Add from "./img/add.png";
+import Add from "./../img/add.png";
 
 function Register() {
     return (
