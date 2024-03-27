@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { auth, app } from "../firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
 
 function Login() {
     const [userCredentials, setUserCredentials] = useState({});
@@ -29,6 +32,12 @@ function Login() {
             .catch((error) => {
                 setError(error.message);
             });
+    }
+    function handlePasswordReset() {
+        const email = prompt("Please enter your email");
+        sendPasswordResetEmail(auth, email).then(() => {
+            alert("Email sent! Check your inbox for password reset");
+        });
     }
     return (
         <Container>
@@ -61,7 +70,9 @@ function Login() {
                     </Button>
                 </Form>
                 {error && <Error>{error}</Error>}
-                <p>You don't have an account? Login</p>
+                <ForgetPassword onClick={handlePasswordReset}>
+                    Forgot Password? Login
+                </ForgetPassword>
             </Wrapper>
         </Container>
     );
@@ -119,4 +130,7 @@ const Button = styled.button`
 `;
 const Error = styled.div`
     color: red;
+`;
+const ForgetPassword = styled.div`
+    color: blue;
 `;
