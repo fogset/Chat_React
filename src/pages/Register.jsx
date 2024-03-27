@@ -1,30 +1,72 @@
-import React from "react";
 import styled from "styled-components";
 import Add from "./../img/add.png";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
 
 function Register() {
+    const auth = getAuth();
+    const [userCredentials, setUserCredentials] = useState({});
+    function handleCredentials(e) {
+        setUserCredentials({
+            ...userCredentials,
+            [e.target.name]: e.target.value,
+        });
+        console.log(userCredentials);
+    }
+    function handleSignup(e) {
+        e.preventDefault();
+        createUserWithEmailAndPassword(
+            auth,
+            userCredentials.email,
+            userCredentials.password
+        )
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                console.log(errorMessage);
+            });
+    }
     return (
         <Container>
             <Wrapper>
                 <Logo>Lama Chat</Logo>
                 <Title>Register</Title>
                 <Form>
-                    <Input type="text" placeholder="display name" />
-                    <Input type="email" placeholder="email" />
-                    <Input type="password" placeholder="password" />
-                    <Input type="file" style={{ display: "none" }} />
-                    <Label htmlFor="file">
-                        <Image src={Add} />
-                        <span>Add an avatar</span>
-                    </Label>
-                    <Button>Sign up</Button>
+                    <Input
+                        onChange={(e) => {
+                            handleCredentials(e);
+                        }}
+                        type="email"
+                        name="email"
+                        placeholder="email"
+                    />
+                    <Input
+                        onChange={(e) => {
+                            handleCredentials(e);
+                        }}
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                    />
+                    <Button
+                        onClick={(e) => {
+                            handleSignup(e);
+                        }}
+                    >
+                        Sign up
+                    </Button>
                 </Form>
                 <p>You don't have an account? Login</p>
             </Wrapper>
         </Container>
     );
 }
-
+// <Input type="text" placeholder="display name" />;
 export default Register;
 const Container = styled.button`
     background-color: #a7bcff;

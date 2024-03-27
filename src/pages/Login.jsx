@@ -1,14 +1,44 @@
-import React from "react";
 import styled from "styled-components";
+import React, { useState } from "react";
+import { auth, app } from "../firebase";
+
 function Login() {
+    const [userCredentials, setUserCredentials] = useState({});
+    console.log(auth);
+
+    function handleCredentials(e) {
+        setUserCredentials({
+            ...userCredentials,
+            [e.target.name]: e.target.value,
+        });
+        console.log(userCredentials);
+    }
+    function handleSignup(e) {
+        e.preventDefault();
+        console.log(userCredentials);
+    }
     return (
         <Container>
             <Wrapper>
                 <Logo>Lama Chat</Logo>
                 <Title>Register</Title>
                 <Form>
-                    <Input type="email" placeholder="email" />
-                    <Input type="password" placeholder="password" />
+                    <Input
+                        onChange={(e) => {
+                            handleCredentials(e);
+                        }}
+                        type="email"
+                        name="email"
+                        placeholder="email"
+                    />
+                    <Input
+                        onChange={(e) => {
+                            handleCredentials(e);
+                        }}
+                        type="password"
+                        name="password"
+                        placeholder="password"
+                    />
                     <Button>Sign in</Button>
                 </Form>
                 <p>You don't have an account? Login</p>
