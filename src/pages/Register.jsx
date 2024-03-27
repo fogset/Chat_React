@@ -6,15 +6,16 @@ import React, { useState } from "react";
 function Register() {
     const auth = getAuth();
     const [userCredentials, setUserCredentials] = useState({});
+    const [error, setError] = useState(null);
     function handleCredentials(e) {
         setUserCredentials({
             ...userCredentials,
             [e.target.name]: e.target.value,
         });
-        console.log(userCredentials);
     }
     function handleSignup(e) {
         e.preventDefault();
+        setError(null);
         createUserWithEmailAndPassword(
             auth,
             userCredentials.email,
@@ -22,13 +23,9 @@ function Register() {
         )
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode);
-                console.log(errorMessage);
+                setError(error.message);
             });
     }
     return (
@@ -61,6 +58,7 @@ function Register() {
                         Sign up
                     </Button>
                 </Form>
+                {error && <Error>{error}</Error>}
                 <p>You don't have an account? Login</p>
             </Wrapper>
         </Container>
@@ -126,4 +124,7 @@ const Label = styled.label`
     color: #8da4f1;
     font-size: 12px;
     cursor: pointer;
+`;
+const Error = styled.div`
+    color: red;
 `;
