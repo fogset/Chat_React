@@ -2,8 +2,10 @@ import styled from "styled-components";
 import Add from "./../img/add.png";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
-
+import { useRecoilState } from "recoil";
+import { login_UserRecoil } from "../globalVariable";
 function Register() {
+    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const auth = getAuth();
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
@@ -23,6 +25,10 @@ function Register() {
         )
             .then((userCredential) => {
                 const user = userCredential.user;
+                setLoginUser({
+                    id: user.uid,
+                    email: user.email,
+                });
             })
             .catch((error) => {
                 setError(error.message);

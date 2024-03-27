@@ -5,11 +5,15 @@ import {
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
 } from "firebase/auth";
+import { useRecoilState } from "recoil";
+import { login_UserRecoil } from "../globalVariable";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
-    console.log(auth);
+    const navigate = useNavigate();
 
     function handleCredentials(e) {
         setUserCredentials({
@@ -20,14 +24,18 @@ function Login() {
     }
     function handleLogin(e) {
         e.preventDefault();
+        setError(null);
         signInWithEmailAndPassword(
             auth,
             userCredentials.email,
             userCredentials.password
         )
             .then((userCredential) => {
-                const user = userCredential.user;
-                setError(null);
+                setLoginUser({
+                    id: userCredential.user.uid,
+                    email: userCredential.user.email,
+                });
+                navigate(`/loginUser/${userCredential.user.uid}`);
             })
             .catch((error) => {
                 setError(error.message);
