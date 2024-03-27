@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { auth, app } from "../firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
     const [userCredentials, setUserCredentials] = useState({});
+    const [error, setError] = useState(null);
     console.log(auth);
 
     function handleCredentials(e) {
@@ -13,15 +15,26 @@ function Login() {
         });
         console.log(userCredentials);
     }
-    function handleSignup(e) {
+    function handleLogin(e) {
         e.preventDefault();
-        console.log(userCredentials);
+        signInWithEmailAndPassword(
+            auth,
+            userCredentials.email,
+            userCredentials.password
+        )
+            .then((userCredential) => {
+                const user = userCredential.user;
+                setError(null);
+            })
+            .catch((error) => {
+                setError(error.message);
+            });
     }
     return (
         <Container>
             <Wrapper>
                 <Logo>Lama Chat</Logo>
-                <Title>Register</Title>
+                <Title>Login</Title>
                 <Form>
                     <Input
                         onChange={(e) => {
@@ -39,8 +52,15 @@ function Login() {
                         name="password"
                         placeholder="password"
                     />
-                    <Button>Sign in</Button>
+                    <Button
+                        onClick={(e) => {
+                            handleLogin(e);
+                        }}
+                    >
+                        Sign in
+                    </Button>
                 </Form>
+                {error && <Error>{error}</Error>}
                 <p>You don't have an account? Login</p>
             </Wrapper>
         </Container>
@@ -96,4 +116,7 @@ const Button = styled.button`
     font-weight: bold;
     border: none;
     cursor: pointer;
+`;
+const Error = styled.div`
+    color: red;
 `;
