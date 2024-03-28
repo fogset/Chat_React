@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "./globalVariable";
 import { Route, Routes } from "react-router-dom";
+import LoginOrSignUp from "./pages/LoginOrSignUp";
 
 function App() {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
@@ -11,12 +12,11 @@ function App() {
         <div>
             {loginUser && (
                 <Routes>
-                    <Route path="/register" element={<Register />} />
                     <Route path="/" element={<Home />} />
                     <Route path="/loginUser/:id" element={<Home />} />
                 </Routes>
             )}
-            {loginUser === null && <Login />}
+            {loginUser === null && <LoginOrSignUp />}
         </div>
     );
 }

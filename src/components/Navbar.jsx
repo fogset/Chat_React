@@ -9,7 +9,6 @@ function Navbar() {
         signOut(auth)
             .then(() => {
                 setLoginUser(null);
-                alert("logged out");
             })
             .catch((error) => {
                 console.log(error);

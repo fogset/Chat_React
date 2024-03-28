@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "../globalVariable";
-function Register() {
+function Register({ setIfLogin }) {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const auth = getAuth();
     const [userCredentials, setUserCredentials] = useState({});
@@ -33,6 +33,9 @@ function Register() {
             .catch((error) => {
                 setError(error.message);
             });
+    }
+    function Login() {
+        setIfLogin(true);
     }
     return (
         <Container>
@@ -65,7 +68,7 @@ function Register() {
                     </Button>
                 </Form>
                 {error && <Error>{error}</Error>}
-                <p>You don't have an account? Login</p>
+                <Error onClick={Login}>You don't have an account? Login</Error>
             </Wrapper>
         </Container>
     );

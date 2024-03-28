@@ -10,7 +10,7 @@ import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "../globalVariable";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setIfLogin }) {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
@@ -56,6 +56,9 @@ function Login() {
             alert("Email sent! Check your inbox for password reset");
         });
     }
+    function SignUp() {
+        setIfLogin(false);
+    }
     return (
         <Container>
             <Wrapper>
@@ -90,13 +93,13 @@ function Login() {
                 <ForgetPassword onClick={handlePasswordReset}>
                     Forgot Password? Login
                 </ForgetPassword>
+                <Error onClick={SignUp}>No account? Sign up</Error>
             </Wrapper>
         </Container>
     );
 }
 
 export default Login;
-
 const Container = styled.button`
     background-color: #a7bcff;
     height: 100vh;
@@ -150,4 +153,7 @@ const Error = styled.div`
 `;
 const ForgetPassword = styled.div`
     color: blue;
+`;
+const SignUp = styled.div`
+    color: red;
 `;
