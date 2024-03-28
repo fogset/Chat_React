@@ -1,6 +1,21 @@
 import styled from "styled-components";
-
+import { signOut } from "firebase/auth";
+import { auth } from "./../firebase.js";
+import { useRecoilState } from "recoil";
+import { login_UserRecoil } from "./../globalVariable";
 function Navbar() {
+    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
+    function handleSignOut() {
+        signOut(auth)
+            .then(() => {
+                setLoginUser(null);
+                alert("logged out");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
     return (
         <NavbarContainer>
             <Logo>Lama chat</Logo>
@@ -11,7 +26,7 @@ function Navbar() {
                     }
                 />
                 <span>John</span>
-                <Button>logout</Button>
+                <Button onClick={handleSignOut}>logout</Button>
             </User>
         </NavbarContainer>
     );

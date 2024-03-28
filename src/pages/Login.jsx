@@ -4,6 +4,7 @@ import { auth, app } from "../firebase";
 import {
     sendPasswordResetEmail,
     signInWithEmailAndPassword,
+    onAuthStateChanged,
 } from "firebase/auth";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "../globalVariable";
@@ -14,6 +15,18 @@ function Login() {
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            setLoginUser({
+                id: user.uid,
+                email: user.email,
+            });
+        } else {
+            setLoginUser(null);
+        }
+    });
 
     function handleCredentials(e) {
         setUserCredentials({
@@ -31,10 +44,6 @@ function Login() {
             userCredentials.password
         )
             .then((userCredential) => {
-                setLoginUser({
-                    id: userCredential.user.uid,
-                    email: userCredential.user.email,
-                });
                 navigate(`/loginUser/${userCredential.user.uid}`);
             })
             .catch((error) => {
