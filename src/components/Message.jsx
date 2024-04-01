@@ -20,6 +20,7 @@ const Container = styled.div`
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    justify-content: space-between;
 `;
 const MessageInfo = styled.div`
     display: flex;
