@@ -15,6 +15,6 @@ function Sidebar() {
 
 export default Sidebar;
 const SidebarContainer = styled.div`
-    width: 30%;
+    width: 25%;
     background: #3e3c61;
 `;

@@ -27,7 +27,7 @@ export default Chat;
 const Container = styled.div`
     height: 100%;
     position: relative;
-    width: 70%;
+    width: 100%;
 `;
 const ChatInfo = styled.div`
     height: 50px;
