@@ -25,13 +25,15 @@ const Form = styled.div`
     padding: 10px;
 `;
 const Input = styled.input`
-    background-color: transparent;
+    font-size: large;
+    height: 20px;
+    background-color: white;
     border: none;
-    color: white;
+    color: black;
     outline: none;
     width: 100%;
     &::placeholder {
-        color: lightgray;
+        color: darkblue;
     }
 `;
 

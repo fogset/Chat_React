@@ -25,7 +25,7 @@ function Navbar() {
                     }
                 />
                 <span>John</span>
-                <Button onClick={handleSignOut}>logout</Button>
+                <Button onClick={handleSignOut}>Logout</Button>
             </User>
         </NavbarContainer>
     );
@@ -49,20 +49,26 @@ const Logo = styled.span`
 `;
 const User = styled.div`
     display: flex;
-    gap: 10px;
+    span {
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 15px;
+    }
 `;
 const Image = styled.img`
     background-color: #ddddf7;
-    height: 24px;
-    width: 24px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     object-fit: cover;
 `;
+
 const Button = styled.button`
     background-color: #5d5b8d;
     color: #ddddf7;
     font-size: 10px;
     border: none;
+    font-size: large;
     cursor: pointer;
     @include tablet {
         position: absolute;
