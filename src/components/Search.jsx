@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Avatar from "./Avatar";
 function Search() {
     return (
         <Container>
@@ -7,7 +8,7 @@ function Search() {
                 <Input type="text" placeholder="find a user" />
             </Form>
             <UserChat>
-                <Image src="https://media.istockphoto.com/id/1942772853/photo/a-group-of-friends-enjoying-in-the-sea.jpg?s=1024x1024&w=is&k=20&c=OL5QAWwsPAphJkm0xq2pAtCsv-nBbQRoAXn2VABxOP0=" />
+                <Avatar height={"40px"} width={"40px"} />
                 <UserChatInfo>
                     <span>Jane</span>
                 </UserChatInfo>
@@ -48,12 +49,7 @@ const UserChat = styled.div`
         background-color: #2f2d52;
     }
 `;
-const Image = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-`;
+
 const UserChatInfo = styled.div`
     span {
         font-size: 18px;

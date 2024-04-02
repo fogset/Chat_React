@@ -1,4 +1,4 @@
-export const SeedMessages = [
+export const MessageData = [
     { id: 1, owner: false, message: "Hi!" },
     {
         id: 2,

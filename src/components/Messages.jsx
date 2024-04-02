@@ -1,17 +1,14 @@
 import React from "react";
 import Message from "./Message";
 import styled from "styled-components";
+import { MessageData } from "../data/MessageData";
 
 function Messages() {
     return (
         <Container>
-            <Message />
-            <Message />
-            <Message />
-            <Message />
-            <Message />
-            <Message />
-            <Message />
+            {MessageData.map((message) => (
+                <Message msssage={message} owner={message.owner} />
+            ))}
         </Container>
     );
 }

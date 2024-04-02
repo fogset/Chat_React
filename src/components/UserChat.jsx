@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import Avatar from "./Avatar";
 function UserChat() {
     return (
         <Container>
-            <Image src="https://media.istockphoto.com/id/1942772853/photo/a-group-of-friends-enjoying-in-the-sea.jpg?s=1024x1024&w=is&k=20&c=OL5QAWwsPAphJkm0xq2pAtCsv-nBbQRoAXn2VABxOP0=" />
+            <Avatar height={"40px"} width={"40px"} />
             <UserChatInfo>
                 <span>Jane</span>
                 <p>Hello</p>
@@ -13,12 +14,6 @@ function UserChat() {
 }
 
 export default UserChat;
-const Image = styled.img`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-`;
 const UserChatInfo = styled.div`
     color: white;
     span {

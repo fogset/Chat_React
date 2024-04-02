@@ -3,6 +3,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "./../firebase.js";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "./../globalVariable";
+import Avatar from "./Avatar.jsx";
 function Navbar() {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     function handleSignOut() {
@@ -19,11 +20,7 @@ function Navbar() {
         <NavbarContainer>
             <Logo>Lama chat</Logo>
             <User>
-                <Image
-                    src={
-                        "https://media.istockphoto.com/id/1942772853/photo/a-group-of-friends-enjoying-in-the-sea.jpg?s=1024x1024&w=is&k=20&c=OL5QAWwsPAphJkm0xq2pAtCsv-nBbQRoAXn2VABxOP0="
-                    }
-                />
+                <Avatar height={"40px"} width={"40px"} />
                 <span>John</span>
                 <Button onClick={handleSignOut}>Logout</Button>
             </User>

@@ -1,50 +1,55 @@
 import React from "react";
 import styled from "styled-components";
 import Avatar from "./Avatar";
-function Message() {
+function Message({ msssage, owner }) {
     return (
         <Container>
-            <MessageInfo>
-                <Avatar height={"40px"} width={"40px"} />
-                <span>just now</span>
-            </MessageInfo>
-            <MessageContent>
-                <p>hello</p>
-                <Avatar height={"40px"} width={"40px"} />
-            </MessageContent>
+            {owner === true && (
+                <OwnerMessage>
+                    <OwnerContent>{msssage.message}</OwnerContent>
+                    <span>just now</span>
+                </OwnerMessage>
+            )}
+            {owner === false && (
+                <OtherMessage>
+                    <p>{msssage.message}</p>
+                    <span>just now</span>
+                </OtherMessage>
+            )}
         </Container>
     );
 }
 
 export default Message;
 const Container = styled.div`
-    display: flex;
-    gap: 20px;
+    position: relative;
     margin-bottom: 20px;
-    justify-content: space-between;
 `;
-const MessageInfo = styled.div`
+const OwnerMessage = styled.div`
+    text-align: right;
     display: flex;
     flex-direction: column;
-    color: gray;
-    font-weight: 300;
 `;
-const MessageContent = styled.div`
+const OwnerContent = styled.div`
+    background-color: purple;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px 10px 10px 10px;
+    width: fit-content;
+    margin-left: auto;
+`;
+const OtherMessage = styled.div`
     max-width: 80%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     p {
         background-color: white;
         padding: 10px 20px;
-        border-radius: 0px 10px 10px 10px;
+        border-radius: 10px 10px 10px 10px;
         max-width: max-content;
+        margin-bottom: 0px;
     }
-`;
-
-const Image = styled.img`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
+    span {
+        margin-top: 0px;
+    }
 `;
