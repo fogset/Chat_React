@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Avatar from "./Avatar";
 function Message() {
     return (
         <Container>
@@ -9,7 +10,7 @@ function Message() {
             </MessageInfo>
             <MessageContent>
                 <p>hello</p>
-                <Image src="https://media.istockphoto.com/id/1942772853/photo/a-group-of-friends-enjoying-in-the-sea.jpg?s=1024x1024&w=is&k=20&c=OL5QAWwsPAphJkm0xq2pAtCsv-nBbQRoAXn2VABxOP0=" />
+                <Avatar customHeight={"40px"} customWidth={"40px"} />
             </MessageContent>
         </Container>
     );
