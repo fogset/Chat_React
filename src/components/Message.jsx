@@ -5,12 +5,12 @@ function Message() {
     return (
         <Container>
             <MessageInfo>
-                <Image src="https://media.istockphoto.com/id/1942772853/photo/a-group-of-friends-enjoying-in-the-sea.jpg?s=1024x1024&w=is&k=20&c=OL5QAWwsPAphJkm0xq2pAtCsv-nBbQRoAXn2VABxOP0=" />
+                <Avatar height={"40px"} width={"40px"} />
                 <span>just now</span>
             </MessageInfo>
             <MessageContent>
                 <p>hello</p>
-                <Avatar customHeight={"40px"} customWidth={"40px"} />
+                <Avatar height={"40px"} width={"40px"} />
             </MessageContent>
         </Container>
     );
