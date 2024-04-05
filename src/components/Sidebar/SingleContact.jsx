@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import Avatar from "./Avatar";
-function UserChat() {
+import Avatar from "../Avatar";
+
+function SingleContact() {
     return (
         <Container>
             <Avatar height={"40px"} width={"40px"} />
             <UserChatInfo>
                 <span>Jane</span>
-                <p>Hello</p>
             </UserChatInfo>
         </Container>
     );
 }
 
-export default UserChat;
+export default SingleContact;
 const UserChatInfo = styled.div`
     color: white;
     span {

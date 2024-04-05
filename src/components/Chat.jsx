@@ -5,17 +5,27 @@ import Add from "../img/add.png";
 import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
+import { useRecoilState } from "recoil";
+import { login_UserRecoil } from "./../globalVariable";
+import { signOut } from "firebase/auth";
+import { auth } from "./../firebase.js";
 
 function Chat() {
+    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
+    function handleSignOut() {
+        signOut(auth)
+            .then(() => {
+                setLoginUser(null);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
     return (
         <Container>
             <ChatInfo>
                 <span>Jane</span>
-                <ChatIcons>
-                    <Image src={Cam} />
-                    <Image src={Add} />
-                    <Image src={More} />
-                </ChatIcons>
+                <Button onClick={handleSignOut}>Logout</Button>
             </ChatInfo>
             <Messages />
             <Input />
@@ -46,4 +56,11 @@ const ChatIcons = styled.div`
         cursor: pointer;
     }
 `;
-const Image = styled.div``;
+const Button = styled.button`
+    background-color: #5d5b8d;
+    color: #ddddf7;
+    font-size: 10px;
+    font-size: large;
+    cursor: pointer;
+    padding: 10px;
+`;

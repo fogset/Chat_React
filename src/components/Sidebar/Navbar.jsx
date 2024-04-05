@@ -1,29 +1,21 @@
 import styled from "styled-components";
 import { signOut } from "firebase/auth";
-import { auth } from "./../firebase.js";
-import { useRecoilState } from "recoil";
-import { login_UserRecoil } from "./../globalVariable";
-import Avatar from "./Avatar.jsx";
-function Navbar() {
-    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
-    function handleSignOut() {
-        signOut(auth)
-            .then(() => {
-                setLoginUser(null);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+import { auth } from "../../firebase.js";
+import Avatar from "../Avatar.jsx";
+
+function Navbar({ setShowContact, showContact }) {
+    function ShowContactList() {
+        setShowContact(!showContact);
     }
 
     return (
         <NavbarContainer>
-            <Logo>Lama chat</Logo>
+            <Logo>Chat</Logo>
             <User>
                 <Avatar height={"40px"} width={"40px"} />
                 <span>John</span>
-                <Button onClick={handleSignOut}>Logout</Button>
             </User>
+            <Button onClick={ShowContactList}>Contacts</Button>
         </NavbarContainer>
     );
 }
@@ -71,4 +63,5 @@ const Button = styled.button`
         position: absolute;
         bottom: 10px;
     }
+    padding: 10px;
 `;

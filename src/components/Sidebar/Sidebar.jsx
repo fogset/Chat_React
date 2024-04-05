@@ -3,12 +3,17 @@ import styled from "styled-components";
 import Navbar from "./Navbar";
 import Search from "./Search";
 import Chats from "./Chats";
+import Contact from "./Contact";
+import { useState } from "react";
+
 function Sidebar() {
+    const [showContact, setShowContact] = useState(false);
     return (
         <SidebarContainer>
-            <Navbar />
+            <Navbar setShowContact={setShowContact} showContact={showContact} />
             <Search />
-            <Chats />
+            {showContact === false && <Chats />}
+            {showContact === true && <Contact />}
         </SidebarContainer>
     );
 }

@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import UserChat from "./UserChat";
+import SingleChat from "./SingleChat";
 function Chats() {
     return (
         <Container>
-            <UserChat />
-            <UserChat />
-            <UserChat />
-            <UserChat />
-            <UserChat />
-            <UserChat />
-            <UserChat />
-            <UserChat />
+            <SingleChat />
+            <SingleChat />
+            <SingleChat />
+            <SingleChat />
+            <SingleChat />
+            <SingleChat />
+            <SingleChat />
+            <SingleChat />
         </Container>
     );
 }
