@@ -32,6 +32,7 @@ const Container = styled.div`
     gap: 10px;
     color: white;
     cursor: pointer;
+    border-bottom: 1px solid gray;
     &:hover {
         background-color: #2f2d52;
     }

@@ -18,7 +18,7 @@ function Contact() {
 
 export default Contact;
 const Container = styled.div`
-    height: calc(100% - 180px);
+    height: calc(100% - 110px);
     overflow: scroll;
     overflow-x: hidden;
 `;
