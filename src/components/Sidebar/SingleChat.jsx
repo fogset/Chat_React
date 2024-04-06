@@ -4,7 +4,7 @@ import Avatar from "../Avatar";
 function SingleChat() {
     return (
         <Container>
-            <Avatar height={"40px"} width={"40px"} />
+            <Avatar height={"50px"} width={"50px"} />
             <UserChatInfo>
                 <AvatarInfo>
                     <span>Jane</span>

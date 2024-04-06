@@ -3,7 +3,7 @@ import { login_UserRecoil } from "./globalVariable";
 import { Route, Routes } from "react-router-dom";
 import LoginOrSignUp from "./pages/LoginOrSignUp";
 import Messenger from "./pages/Home";
-import Profile from "./components/Profile";
+import Profile from "./components/Sidebar/Profile";
 
 function App() {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);

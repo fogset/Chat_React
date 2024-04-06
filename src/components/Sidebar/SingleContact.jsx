@@ -5,7 +5,7 @@ import Avatar from "../Avatar";
 function SingleContact() {
     return (
         <Container>
-            <Avatar height={"40px"} width={"40px"} />
+            <Avatar height={"50px"} width={"50px"} />
             <UserChatInfo>
                 <span>Jane</span>
             </UserChatInfo>

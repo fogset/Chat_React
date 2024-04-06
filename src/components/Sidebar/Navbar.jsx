@@ -3,16 +3,15 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.js";
 import Avatar from "../Avatar.jsx";
 
-function Navbar({ setShowContact, showContact }) {
+function Navbar({ setShowContact, showContact, setShowProfile }) {
     function ShowContactList() {
         setShowContact(!showContact);
     }
-
     return (
         <NavbarContainer>
             <Logo>Chat</Logo>
-            <User>
-                <Avatar height={"40px"} width={"40px"} />
+            <User onClick={() => setShowProfile(true)}>
+                <Avatar height={"50px"} width={"50px"} />
                 <span>John</span>
             </User>
             <Button onClick={ShowContactList}>
@@ -33,6 +32,8 @@ const NavbarContainer = styled.div`
     color: #ddddf7;
 `;
 const Logo = styled.span`
+    font-size: large;
+    color: white;
     font-weight: bold;
     @include tablet {
         display: none;
@@ -41,7 +42,8 @@ const Logo = styled.span`
 const User = styled.div`
     display: flex;
     span {
-        margin-top: 10px;
+        font-size: large;
+        margin-top: 15px;
         margin-left: 10px;
         margin-right: 15px;
     }
