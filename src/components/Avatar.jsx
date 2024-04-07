@@ -15,7 +15,6 @@ export default Avatar;
 const AvatarImage = styled.img`
     width: ${(props) => (props.width ? props.width : "auto")};
     height: ${(props) => (props.height ? props.height : "auto")};
-    border-radius: 50%;
     object-fit: cover;
-    //border-radius: ${(props) => (props.shape ? props.shape : "100%")};
+    border-radius: ${(props) => (props.shape ? props.shape : "50px")};
 `;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Avatar from "../Avatar";
 import { FaEdit } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
+import { FaCamera } from "react-icons/fa6";
 function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
     return (
@@ -19,11 +20,13 @@ function Profile({ showProfile, setShowProfile }) {
                 <ProfileInfos>
                     <AvatarWrapper>
                         <Avatar
-                            height={"100px"}
-                            width={"100px"}
-                            shape={"100%"}
+                            height={"150px"}
+                            width={"150px"}
+                            shape={"30px"}
                         />
-                        <i className="fa-solid fa-camera"></i>
+                        <CameraIcon>
+                            <FaCamera size={30} />
+                        </CameraIcon>
                     </AvatarWrapper>
                     <ProfileForm onSubmit={() => {}}>
                         <input type="text" placeholder="Username" />
@@ -43,7 +46,11 @@ function Profile({ showProfile, setShowProfile }) {
             {onEdit === false && (
                 <ProfileInfos>
                     <AvatarWrapper>
-                        <Avatar height={"50px"} width={"50px"} shape={"100%"} />
+                        <Avatar
+                            height={"150px"}
+                            width={"150px"}
+                            shape={"30px"}
+                        />
                     </AvatarWrapper>
                     <Username>John Doe</Username>
                     <Email>johndoe@email.com</Email>
@@ -65,8 +72,8 @@ const Container = styled.div`
     left: 0px;
     background-color: #5d5b8d;
     height: 100%;
-    width: 350px;
-    z-index: 100;
+    width: 320px;
+    z-index: 10;
 `;
 const Wrapper = styled.div`
     width: 100%;
@@ -80,6 +87,7 @@ const Topbar = styled.div`
     align-items: center;
     justify-content: space-between;
     font-size: 1.2rem;
+    color: white;
 `;
 const Heading = styled.span`
     font-size: 1.2rem;
@@ -101,6 +109,7 @@ const ProfileInfos = styled.div`
     padding: 1.5rem 1rem;
     gap: 1rem;
     height: calc(100vh - 70px);
+    color: white;
 `;
 const AvatarWrapper = styled.div`
     height: 150px;
@@ -152,13 +161,14 @@ const CancelButton = styled.button`
     align-items: center;
     justify-content: center;
     background-color: whitesmoke;
-`;
-const SaveButton = styled(CancelButton)`
-    background-color: rgba(255, 255, 255, 0.4);
+    padding: 5px;
     &:hover {
         color: white;
         background-color: darkblue;
     }
+`;
+const SaveButton = styled(CancelButton)`
+    background-color: rgba(255, 255, 255, 0.4);
 `;
 const Username = styled.span`
     font-size: 1.3rem;
@@ -174,4 +184,12 @@ const Status = styled.p`
 const Editbutton = styled.button`
     width: max-content;
     font-size: large;
+    padding: 10px;
+`;
+const CameraIcon = styled.div`
+    position: absolute;
+    z-index: 10;
+    bottom: 0px;
+    right: 5px;
+    color: white;
 `;
