@@ -1,11 +1,19 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "../Avatar";
 import { FaEdit } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
+import { useRecoilState } from "recoil";
+import { login_UserRecoil } from "./../../globalVariable";
+
 function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
+    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
+    useEffect(() => {
+        console.log(loginUser);
+    }, [loginUser]);
+
     return (
         <Container>
             <Wrapper>
@@ -53,7 +61,7 @@ function Profile({ showProfile, setShowProfile }) {
                         />
                     </AvatarWrapper>
                     <Username>John Doe</Username>
-                    <Email>johndoe@email.com</Email>
+                    <Email>{loginUser?.email}</Email>
                     <Status>some description</Status>
                     <Editbutton onClick={() => setOnEdit(true)}>
                         <FaEdit size={18} />
