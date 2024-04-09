@@ -1,9 +1,20 @@
 import styled from "styled-components";
-import Add from "./../img/add.png";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "../globalVariable";
+import { createUserAsync } from "../Firebase/chatServices";
+import { db } from "./../firebase";
+import {
+    doc,
+    setDoc,
+    collection,
+    addDoc,
+    serverTimestamp,
+    getDoc,
+} from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { GetUserByEmail } from "../Firebase/authServices";
+
 function Register({ setIfLogin }) {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const auth = getAuth();
@@ -25,10 +36,9 @@ function Register({ setIfLogin }) {
         )
             .then((userCredential) => {
                 const user = userCredential.user;
-                setLoginUser({
-                    id: user.uid,
-                    email: user.email,
-                });
+                AddUserToFirebase();
+                const UserInfo = GetUserByEmail(userCredentials.email);
+                setLoginUser(UserInfo);
             })
             .catch((error) => {
                 setError(error.message);
@@ -37,12 +47,38 @@ function Register({ setIfLogin }) {
     function Login() {
         setIfLogin(true);
     }
+    const AddUserToFirebase = async () => {
+        try {
+            await setDoc(doc(db, "users", userCredentials.email), {
+                username: userCredentials.username,
+                email: userCredentials.email,
+                desc: "Hello from my country 😀",
+                profile: "",
+                createdAt: serverTimestamp(),
+            });
+            alert("added");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    function Test() {
+        GetUserByEmail(userCredentials.email);
+    }
+
     return (
         <Container>
             <Wrapper>
-                <Logo>Lama Chat</Logo>
-                <Title>Register</Title>
+                <Logo onClick={AddUserToFirebase}>Lama Chat</Logo>
+                <Title onClick={Test}>Register</Title>
                 <Form>
+                    <Input
+                        onChange={(e) => {
+                            handleCredentials(e);
+                        }}
+                        type="username"
+                        name="username"
+                        placeholder="username"
+                    />
                     <Input
                         onChange={(e) => {
                             handleCredentials(e);
@@ -59,6 +95,7 @@ function Register({ setIfLogin }) {
                         name="password"
                         placeholder="password"
                     />
+
                     <Button
                         onClick={(e) => {
                             handleSignup(e);

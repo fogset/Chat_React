@@ -11,6 +11,7 @@ function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     useEffect(() => {
+        console.log("loginUser");
         console.log(loginUser);
     }, [loginUser]);
 
