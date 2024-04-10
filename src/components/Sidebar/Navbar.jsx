@@ -1,9 +1,13 @@
 import styled from "styled-components";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase.js";
+import { useState, useEffect } from "react";
 import Avatar from "../Avatar.jsx";
+import { useRecoilState } from "recoil";
+import { login_UserRecoil } from "./../../globalVariable";
 
 function Navbar({ setShowContact, showContact, setShowProfile }) {
+    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     function ShowContactList() {
         setShowContact(!showContact);
     }
@@ -12,7 +16,7 @@ function Navbar({ setShowContact, showContact, setShowProfile }) {
             <Logo>Chat</Logo>
             <User onClick={() => setShowProfile(true)}>
                 <Avatar height={"50px"} width={"50px"} />
-                <span>John</span>
+                <span>{loginUser.username}</span>
             </User>
             <Button onClick={ShowContactList}>
                 {showContact ? "Contacts" : "Chats"}

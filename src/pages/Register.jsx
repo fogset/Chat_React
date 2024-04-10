@@ -20,6 +20,7 @@ function Register({ setIfLogin }) {
     const auth = getAuth();
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
+    const [test, setTest] = useState(null);
     function handleCredentials(e) {
         setUserCredentials({
             ...userCredentials,
@@ -62,7 +63,9 @@ function Register({ setIfLogin }) {
         }
     };
     function Test() {
-        GetUserByEmail(userCredentials.email);
+        const UserInfo = GetUserByEmail(userCredentials.email, setTest);
+        console.log("UserInfo.email loginUser");
+        console.log(test.email);
     }
 
     return (

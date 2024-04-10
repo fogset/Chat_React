@@ -11,9 +11,9 @@ function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     useEffect(() => {
-        console.log("loginUser");
-        console.log(loginUser);
-    }, [loginUser]);
+        // console.log("loginUser");
+        // console.log(loginUser.username);
+    }, []);
 
     return (
         <Container>
@@ -61,9 +61,13 @@ function Profile({ showProfile, setShowProfile }) {
                             shape={"30px"}
                         />
                     </AvatarWrapper>
-                    <Username>John Doe</Username>
-                    <Email>{loginUser?.email}</Email>
-                    <Status>some description</Status>
+                    {loginUser.username && (
+                        <div>
+                            <Username>{loginUser.username}</Username>
+                            <Email>{loginUser.email}</Email>
+                            <Status>{loginUser.desc}</Status>
+                        </div>
+                    )}
                     <Editbutton onClick={() => setOnEdit(true)}>
                         <FaEdit size={18} />
                         Profile
