@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "../globalVariable";
-import { createUserAsync } from "../Firebase/chatServices";
 import { db } from "./../firebase";
 import {
     doc,
@@ -13,7 +12,7 @@ import {
     getDoc,
 } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { GetUserByEmail } from "../Firebase/authServices";
+import { GetUserByEmail } from "../Firebase/Get";
 
 function Register({ setIfLogin }) {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);

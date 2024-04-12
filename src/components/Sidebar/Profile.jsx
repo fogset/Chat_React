@@ -4,7 +4,7 @@ import Avatar from "../Avatar";
 import { FaEdit } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
-import { updateUserProfile } from "../../Firebase/chatServices";
+import { updateUserProfile } from "../../Firebase/Update";
 
 function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
