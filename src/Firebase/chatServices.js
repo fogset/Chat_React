@@ -30,5 +30,10 @@ export const createUserAsync = async (user) => {
         console.log(error);
     }
 };
-
-// update user
+export const updateUserProfile = async (username, description, email) => {
+    const profileRef = doc(db, "users", email);
+    await updateDoc(profileRef, {
+        username: username,
+        description: description,
+    });
+};

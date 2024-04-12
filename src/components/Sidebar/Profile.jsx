@@ -4,20 +4,28 @@ import Avatar from "../Avatar";
 import { FaEdit } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
+import { updateUserProfile } from "../../Firebase/chatServices";
 
 function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
+    const [userName, setUserName] = useState(null);
+    const [description, setDescription] = useState(null);
     const [loginUser, setLoginUser] = useState(null);
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("LoginUser"));
         setLoginUser(data);
     }, []);
+    function SaveToFireBase() {
+        updateUserProfile(userName, description, loginUser.email);
+    }
 
     return (
         <Container>
             <Wrapper>
                 <Topbar>
                     <Heading>Profile</Heading>
+                    {userName}
+                    {description}
                     <AppIcon onClick={() => setShowProfile(false)}>
                         <SlClose size={30} />
                     </AppIcon>
@@ -36,16 +44,23 @@ function Profile({ showProfile, setShowProfile }) {
                         </CameraIcon>
                     </AvatarWrapper>
                     <ProfileForm onSubmit={() => {}}>
-                        <input type="text" placeholder="Username" />
+                        <input
+                            type="text"
+                            placeholder="Username"
+                            onChange={(e) => setUserName(e.target.value)}
+                        />
                         <textarea
                             type="text"
                             placeholder="Write something about you."
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                         <ProfileActions>
                             <CancelButton onClick={() => setOnEdit(false)}>
                                 Cancel
                             </CancelButton>
-                            <SaveButton type="submit">Save</SaveButton>
+                            <SaveButton onClick={SaveToFireBase} type="submit">
+                                Save
+                            </SaveButton>
                         </ProfileActions>
                     </ProfileForm>
                 </ProfileInfos>
@@ -63,7 +78,7 @@ function Profile({ showProfile, setShowProfile }) {
                         <ProfileDetail>
                             <Username>{loginUser.username}</Username>
                             <Email>{loginUser.email}</Email>
-                            <Status>{loginUser.desc}</Status>
+                            <Status>{loginUser.description}</Status>
                         </ProfileDetail>
                     )}
                     <Editbutton onClick={() => setOnEdit(true)}>
@@ -197,6 +212,8 @@ const Email = styled.span`
 const Status = styled.p`
     font-style: italic;
     color: whitesmoke;
+    width: 100%;
+    height: auto;
 `;
 const Editbutton = styled.button`
     width: max-content;

@@ -14,7 +14,7 @@ export const GetUserByEmail = async (email) => {
     if (docSnap.exists()) {
         const data = docSnap.data();
         localStorage.setItem("LoginUser", JSON.stringify(data));
-        //console.log("Document data:", docSnap.data());
+        console.log("Document data:", docSnap.data());
     } else {
         console.log("No such document!");
     }
