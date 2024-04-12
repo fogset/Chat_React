@@ -23,7 +23,7 @@ function Login({ setIfLogin }) {
                 id: user.uid,
                 email: user.email,
             });
-            localStorage.setItem("LoginUser", JSON.stringify(user.email));
+            localStorage.setItem("LoginUserEmail", JSON.stringify(user.email));
         } else {
             setLoginUser(null);
         }

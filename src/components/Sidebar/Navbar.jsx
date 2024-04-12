@@ -1,22 +1,22 @@
 import styled from "styled-components";
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase.js";
 import { useState, useEffect } from "react";
 import Avatar from "../Avatar.jsx";
-import { useRecoilState } from "recoil";
-import { login_UserRecoil } from "./../../globalVariable";
 
 function Navbar({ setShowContact, showContact, setShowProfile }) {
-    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
+    const [loginUser, setLoginUser] = useState(null);
     function ShowContactList() {
         setShowContact(!showContact);
     }
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("LoginUser"));
+        setLoginUser(data);
+    }, []);
     return (
         <NavbarContainer>
             <Logo>Chat</Logo>
             <User onClick={() => setShowProfile(true)}>
                 <Avatar height={"50px"} width={"50px"} />
-                <span>{loginUser.username}</span>
+                {loginUser && <span>{loginUser.username}</span>}
             </User>
             <Button onClick={ShowContactList}>
                 {showContact ? "Contacts" : "Chats"}

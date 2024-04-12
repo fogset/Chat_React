@@ -10,17 +10,9 @@ import { login_UserRecoil } from "./../globalVariable";
 function Messenger() {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const [tempData, setTempData] = useState(null);
-
     useEffect(() => {
-        const email = JSON.parse(localStorage.getItem("LoginUser"));
-        GetUserByEmail(email, setTempData);
-        // setTimeout(() => {
-        //     console.log("tempData");
-        //     console.log(tempData);
-        //     setLoginUser(tempData);
-        //     console.log("loginUser");
-        //     console.log(loginUser);
-        // }, 1000);
+        const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
+        GetUserByEmail(email);
     }, []);
 
     return (

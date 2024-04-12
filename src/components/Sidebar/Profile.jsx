@@ -4,15 +4,13 @@ import Avatar from "../Avatar";
 import { FaEdit } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
-import { useRecoilState } from "recoil";
-import { login_UserRecoil } from "./../../globalVariable";
 
 function Profile({ showProfile, setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
-    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
+    const [loginUser, setLoginUser] = useState(null);
     useEffect(() => {
-        // console.log("loginUser");
-        // console.log(loginUser.username);
+        const data = JSON.parse(localStorage.getItem("LoginUser"));
+        setLoginUser(data);
     }, []);
 
     return (
@@ -61,12 +59,12 @@ function Profile({ showProfile, setShowProfile }) {
                             shape={"30px"}
                         />
                     </AvatarWrapper>
-                    {loginUser.username && (
-                        <div>
+                    {loginUser && (
+                        <ProfileDetail>
                             <Username>{loginUser.username}</Username>
                             <Email>{loginUser.email}</Email>
                             <Status>{loginUser.desc}</Status>
-                        </div>
+                        </ProfileDetail>
                     )}
                     <Editbutton onClick={() => setOnEdit(true)}>
                         <FaEdit size={18} />
@@ -168,6 +166,11 @@ const ProfileActions = styled.div`
     align-items: center;
     gap: 1rem;
 `;
+
+const ProfileDetail = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 const CancelButton = styled.button`
     width: 100px;
     display: flex;
@@ -188,6 +191,7 @@ const Username = styled.span`
     font-weight: bold;
 `;
 const Email = styled.span`
+    margin-top: 5px;
     font-size: 1rem;
 `;
 const Status = styled.p`
