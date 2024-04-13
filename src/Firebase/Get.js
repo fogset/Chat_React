@@ -18,3 +18,14 @@ export const GetUserByEmail = async (email) => {
         console.log("No such document!");
     }
 };
+export const GetMessageListById = async (messageId, setMessage) => {
+    const docRef = doc(db, "messages", messageId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+        setMessage(data);
+        console.log("Document data:", data);
+    } else {
+        console.log("No such document!");
+    }
+};
