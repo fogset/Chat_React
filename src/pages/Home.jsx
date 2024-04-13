@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Sidebar from "../components/Sidebar/Sidebar";
 import Chat from "../components/Chat";
-import { GetUserByEmail } from "../Firebase/Get";
+import { GetTotalUsers, GetUserByEmail } from "../Firebase/Get";
 import { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "./../globalVariable";
@@ -13,6 +13,7 @@ function Messenger() {
     useEffect(() => {
         const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
         GetUserByEmail(email);
+        GetTotalUsers();
     }, []);
 
     return (

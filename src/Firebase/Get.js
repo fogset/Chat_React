@@ -5,6 +5,7 @@ import {
     addDoc,
     serverTimestamp,
     getDoc,
+    getDocs,
 } from "firebase/firestore";
 import { db } from "./../firebase";
 export const GetUserByEmail = async (email) => {
@@ -28,4 +29,12 @@ export const GetMessageListById = async (messageId, setMessage) => {
     } else {
         console.log("No such document!");
     }
+};
+export const GetTotalUsers = async () => {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const arrayData = [];
+    querySnapshot.forEach((doc) => {
+        arrayData.push(doc.data());
+    });
+    localStorage.setItem("totalUsers", JSON.stringify(arrayData));
 };

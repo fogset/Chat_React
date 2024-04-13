@@ -24,8 +24,6 @@ function Profile({ showProfile, setShowProfile }) {
             <Wrapper>
                 <Topbar>
                     <Heading>Profile</Heading>
-                    {userName}
-                    {description}
                     <AppIcon onClick={() => setShowProfile(false)}>
                         <SlClose size={30} />
                     </AppIcon>

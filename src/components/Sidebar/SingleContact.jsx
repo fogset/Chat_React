@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Avatar from "../Avatar";
 
-function SingleContact() {
+function SingleContact({ user }) {
     return (
         <Container>
             <Avatar height={"50px"} width={"50px"} />
             <UserChatInfo>
-                <span>Jane</span>
+                <span>{user.username}</span>
             </UserChatInfo>
         </Container>
     );
