@@ -31,11 +31,7 @@ function Input() {
             />
             <Send>
                 <Image src={Attach} />
-                <InputContainer
-                    type="file"
-                    style={{ display: "none" }}
-                    id="file"
-                />
+                <InputContainer type="file" style={{ display: "none" }} id="file" />
                 <label htmlFor="file">
                     <img src={Img} />
                 </label>

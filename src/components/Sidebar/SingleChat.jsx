@@ -4,9 +4,7 @@ import Avatar from "../Avatar";
 import { useRecoilState } from "recoil";
 import { currentChatContactRecoil } from "./../../globalVariable";
 function SingleChat({ contact }) {
-    const [otherContact, setOtherContact] = useRecoilState(
-        currentChatContactRecoil
-    );
+    const [otherContact, setOtherContact] = useRecoilState(currentChatContactRecoil);
     function contactSelect() {
         setOtherContact(contact);
     }

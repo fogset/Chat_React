@@ -39,11 +39,7 @@ function Login({ setIfLogin }) {
     function handleLogin(e) {
         e.preventDefault();
         setError(null);
-        signInWithEmailAndPassword(
-            auth,
-            userCredentials.email,
-            userCredentials.password
-        )
+        signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then((userCredential) => {
                 navigate(`/loginUser/${userCredential.user.uid}`);
             })

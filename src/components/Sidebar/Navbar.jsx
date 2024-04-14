@@ -18,9 +18,7 @@ function Navbar({ setShowContact, showContact, setShowProfile }) {
                 <Avatar height={"50px"} width={"50px"} />
                 {loginUser && <span>{loginUser.username}</span>}
             </User>
-            <Button onClick={ShowContactList}>
-                {showContact ? "Contacts" : "Chats"}
-            </Button>
+            <Button onClick={ShowContactList}>{showContact ? "Contacts" : "Chats"}</Button>
         </NavbarContainer>
     );
 }

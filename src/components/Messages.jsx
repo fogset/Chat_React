@@ -14,12 +14,9 @@ function Messages() {
     const otherContact = useRecoilValue(currentChatContactRecoil);
     useEffect(() => {
         if (otherContact !== null) {
-            const GetUpdate = onSnapshot(
-                doc(db, "messages", otherContact.messageId),
-                (doc) => {
-                    setMessageList(doc.data().messageList);
-                }
-            );
+            const GetUpdate = onSnapshot(doc(db, "messages", otherContact.messageId), (doc) => {
+                setMessageList(doc.data().messageList);
+            });
         }
     });
 
