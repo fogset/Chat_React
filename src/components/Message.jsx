@@ -10,13 +10,13 @@ function Message({ msssage, sender }) {
             {sender === email && (
                 <OwnerMessage>
                     <OwnerContent>{msssage.message}</OwnerContent>
-                    <span>just now</span>
+                    <span>{msssage.createdAt}</span>
                 </OwnerMessage>
             )}
             {sender !== email && (
                 <OtherMessage>
                     <p>{msssage.message}</p>
-                    <span>just now</span>
+                    <span>{msssage.createdAt}</span>
                 </OtherMessage>
             )}
         </Container>

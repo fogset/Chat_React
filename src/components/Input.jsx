@@ -19,7 +19,9 @@ function Input() {
             createdAt: Date().toLocaleString(),
         });
         updateMessagebyId(messageList, "xHjOadPNP4BLeJ3MxWlD");
+        console.log("messageList");
         console.log(messageList);
+        //alert(message);
     }
     return (
         <Container>

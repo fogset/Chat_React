@@ -4,22 +4,28 @@ import styled from "styled-components";
 import { MessageData } from "../data/MessageData";
 import { useState, useEffect } from "react";
 import { GetMessageListById } from "../Firebase/Get";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "./../firebase";
+
 function Messages() {
     const [message, setMessage] = useState(null);
+    const [messageList, setMessageList] = useState(null);
     useEffect(() => {
         GetMessageListById("xHjOadPNP4BLeJ3MxWlD", setMessage);
         console.log(message);
     }, []);
-    function sendMessage() {
-        GetMessageListById("xHjOadPNP4BLeJ3MxWlD", setMessage);
-        console.log("message");
-        console.log(message.messageList);
-    }
+    const unsub = onSnapshot(
+        doc(db, "messages", "xHjOadPNP4BLeJ3MxWlD"),
+        (doc) => {
+            setMessageList(doc.data().messageList);
+        }
+    );
+
     return (
-        <Container onClick={sendMessage}>
+        <Container>
             {message !== null && (
                 <div>
-                    {message.messageList.map((message) => (
+                    {messageList.map((message) => (
                         <Message msssage={message} sender={message.sender} />
                     ))}
                 </div>
