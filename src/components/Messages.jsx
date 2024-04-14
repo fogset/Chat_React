@@ -16,7 +16,7 @@ function Messages() {
     useEffect(() => {
         if (otherContact !== null) {
             const GetUpdate = onSnapshot(
-                doc(db, "messages", "grUZqspBpwCidzvJMqGF"),
+                doc(db, "messages", otherContact.messageId),
                 (doc) => {
                     setMessageList(doc.data().messageList);
                 }

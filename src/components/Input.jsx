@@ -5,19 +5,22 @@ import Img from "../img/img.png";
 import { useState, useEffect } from "react";
 import { serverTimestamp } from "firebase/firestore";
 import { updateMessagebyId } from "../Firebase/Update";
+import { useRecoilValue } from "recoil";
+import { currentChatContactRecoil } from "./../globalVariable";
 
 // import ImagePath from ../img/cam.png
 function Input() {
     const [message, setMessage] = useState(null);
     const [messageList, setMessageList] = useState([]);
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
+    const otherContact = useRecoilValue(currentChatContactRecoil);
     function sendMessage() {
         messageList.push({
             message: message,
             sender: email,
             createdAt: Date().toLocaleString(),
         });
-        updateMessagebyId(messageList, "xHjOadPNP4BLeJ3MxWlD");
+        updateMessagebyId(messageList, otherContact.messageId);
     }
     return (
         <Container>
