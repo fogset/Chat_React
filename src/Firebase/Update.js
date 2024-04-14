@@ -26,5 +26,5 @@ export const updateMessagebyId = async (messageList, messageId) => {
     await updateDoc(messageRef, {
         messageList: messageList,
     });
-    console.log("Document written with ID: ", messageRef.id);
+    console.log("updateMessagebyId ID: ", messageRef.id);
 };

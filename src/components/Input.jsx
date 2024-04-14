@@ -10,18 +10,15 @@ import { updateMessagebyId } from "../Firebase/Update";
 function Input() {
     const [message, setMessage] = useState(null);
     const [messageList, setMessageList] = useState([]);
+    const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     function sendMessage() {
         //alert(message);
         messageList.push({
             message: message,
-            sender: "a@b.com",
-            receiver: "c@d.com",
+            sender: email,
             createdAt: Date().toLocaleString(),
         });
         updateMessagebyId(messageList, "xHjOadPNP4BLeJ3MxWlD");
-        console.log("messageList");
-        console.log(messageList);
-        //alert(message);
     }
     return (
         <Container>
