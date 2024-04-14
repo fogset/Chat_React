@@ -1,13 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import Avatar from "../Avatar";
-function SingleChat() {
+import { useRecoilState } from "recoil";
+import { currentChatContactRecoil } from "./../../globalVariable";
+function SingleChat({ contact }) {
+    const [otherContact, setOtherContact] = useRecoilState(
+        currentChatContactRecoil
+    );
+    function contactSelect() {
+        setOtherContact(contact);
+        console.log(otherContact);
+    }
     return (
-        <Container>
+        <Container onClick={contactSelect}>
             <Avatar height={"50px"} width={"50px"} />
             <UserChatInfo>
                 <AvatarInfo>
-                    <span>Jane</span>
+                    <span>{contact.email}</span>
                     <Time>2 days ago</Time>
                 </AvatarInfo>
                 <p>Hello</p>

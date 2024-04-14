@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Avatar from "./Avatar";
-function Message({ msssage, sender }) {
+function Message({ msssage, sender, id }) {
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     return (
         <Container>
-            {email}--
-            {sender}
+            {id}
             {sender === email && (
                 <OwnerMessage>
                     <OwnerContent>{msssage.message}</OwnerContent>

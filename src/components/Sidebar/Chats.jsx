@@ -1,17 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import SingleChat from "./SingleChat";
+import { useState, useEffect } from "react";
 function Chats() {
+    const [contactList, setContactList] = useState(null);
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("LoginUser"));
+        setContactList(data.contact);
+    }, []);
+
     return (
         <Container>
-            <SingleChat />
-            <SingleChat />
-            <SingleChat />
-            <SingleChat />
-            <SingleChat />
-            <SingleChat />
-            <SingleChat />
-            <SingleChat />
+            {contactList !== null && (
+                <div>
+                    {contactList.map((contact) => (
+                        <SingleChat contact={contact} />
+                    ))}
+                </div>
+            )}
         </Container>
     );
 }

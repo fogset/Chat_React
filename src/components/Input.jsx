@@ -12,7 +12,6 @@ function Input() {
     const [messageList, setMessageList] = useState([]);
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     function sendMessage() {
-        //alert(message);
         messageList.push({
             message: message,
             sender: email,
