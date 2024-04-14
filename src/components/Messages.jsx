@@ -10,7 +10,6 @@ import { useRecoilValue } from "recoil";
 import { currentChatContactRecoil } from "./../globalVariable";
 
 function Messages() {
-    const [message, setMessage] = useState(null);
     const [messageList, setMessageList] = useState(null);
     const otherContact = useRecoilValue(currentChatContactRecoil);
     useEffect(() => {

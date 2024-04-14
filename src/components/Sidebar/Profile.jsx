@@ -6,7 +6,7 @@ import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
 import { updateUserProfile } from "../../Firebase/Update";
 
-function Profile({ showProfile, setShowProfile }) {
+function Profile({ setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
     const [userName, setUserName] = useState(null);
     const [description, setDescription] = useState(null);
@@ -32,11 +32,7 @@ function Profile({ showProfile, setShowProfile }) {
             {onEdit === true && (
                 <ProfileInfos>
                     <AvatarWrapper>
-                        <Avatar
-                            height={"150px"}
-                            width={"150px"}
-                            shape={"30px"}
-                        />
+                        <Avatar height={"150px"} width={"150px"} shape={"30px"} />
                         <CameraIcon>
                             <FaCamera size={30} />
                         </CameraIcon>
@@ -53,9 +49,7 @@ function Profile({ showProfile, setShowProfile }) {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                         <ProfileActions>
-                            <CancelButton onClick={() => setOnEdit(false)}>
-                                Cancel
-                            </CancelButton>
+                            <CancelButton onClick={() => setOnEdit(false)}>Cancel</CancelButton>
                             <SaveButton onClick={SaveToFireBase} type="submit">
                                 Save
                             </SaveButton>
@@ -66,11 +60,7 @@ function Profile({ showProfile, setShowProfile }) {
             {onEdit === false && (
                 <ProfileInfos>
                     <AvatarWrapper>
-                        <Avatar
-                            height={"150px"}
-                            width={"150px"}
-                            shape={"30px"}
-                        />
+                        <Avatar height={"150px"} width={"150px"} shape={"30px"} />
                     </AvatarWrapper>
                     {loginUser && (
                         <ProfileDetail>

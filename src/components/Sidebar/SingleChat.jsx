@@ -9,7 +9,6 @@ function SingleChat({ contact }) {
     );
     function contactSelect() {
         setOtherContact(contact);
-        console.log(otherContact);
     }
     return (
         <Container onClick={contactSelect}>
