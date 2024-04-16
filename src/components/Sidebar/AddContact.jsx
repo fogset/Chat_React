@@ -4,10 +4,12 @@ import { updateContactbyEmail } from "../../Firebase/Update";
 import Avatar from "./../Avatar";
 import { useState, useEffect } from "react";
 import { CreateNewConversationbyEmail } from "../../Firebase/Add";
+
 function AddContact({ user, currUserContactList, setResultUser }) {
     const loginUserEmail = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const [addContact, setAddContact] = useState([]);
     const [newMessageId, setNewMessageId] = useState(null);
+
     function addUser() {
         CreateNewConversationbyEmail(loginUserEmail, user.email, setNewMessageId);
     }
@@ -21,11 +23,6 @@ function AddContact({ user, currUserContactList, setResultUser }) {
                 messageId: newMessageId,
                 username: user.username,
             };
-            // if (currUserContactList === null) {
-            //     setAddContact(contact);
-            // } else {
-            //     setAddContact([...currUserContactList, contact]);
-            // }
             updateContactbyEmail(loginUserEmail, contact);
         }
     }, [newMessageId]);
