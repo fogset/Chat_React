@@ -28,3 +28,11 @@ export const updateMessagebyId = async (messageList, messageId) => {
     });
     console.log("updateMessagebyId ID: ", messageRef.id);
 };
+export const updateContactbyEmail = async (email, addContact) => {
+    const contactRef = doc(db, "users", email);
+    await updateDoc(contactRef, {
+        contact: addContact,
+    });
+    console.log("addContact firebase");
+    console.log(addContact);
+};
