@@ -7,7 +7,8 @@ function SingleContact({ user }) {
         <Container>
             <Avatar height={"50px"} width={"50px"} />
             <UserChatInfo>
-                <span>{user.username}</span>
+                <userInfo>{user.username}</userInfo>
+                <userInfo>{user.email}</userInfo>
             </UserChatInfo>
         </Container>
     );
@@ -16,14 +17,12 @@ function SingleContact({ user }) {
 export default SingleContact;
 const UserChatInfo = styled.div`
     color: white;
-    span {
-        font-size: 18px;
-        font-weight: 500;
-    }
-    p {
-        font-size: 14px;
-        color: lightgray;
-    }
+    display: flex;
+    flex-direction: column;
+`;
+const userInfo = styled.div`
+    font-size: 15px;
+    font-weight: 500;
 `;
 const Container = styled.div`
     padding: 10px;

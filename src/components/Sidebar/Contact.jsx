@@ -1,19 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 import SingleContact from "./SingleContact";
-import { doc, onSnapshot } from "firebase/firestore";
 import { useState, useEffect } from "react";
-
 import { CiSearch } from "react-icons/ci";
+import AddContact from "./AddContact";
+import { doc, onSnapshot } from "firebase/firestore";
+import { db } from "./../../firebase";
+
 function Contact() {
+    const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const [totalUser, setTotalUser] = useState(null);
+    const [currUserContactList, setCurrUserContactList] = useState(null);
     const [searchUser, setSearchUser] = useState(null);
+    const [resultUser, setResultUser] = useState(null);
+
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("totalUsers"));
         setTotalUser(data);
     }, []);
+    const currUserContactListFirebase = onSnapshot(doc(db, "users", email), (doc) => {
+        setCurrUserContactList(doc.data().contact);
+    });
     function onClickSearch() {
-        console.log(searchUser);
+        const findUser = totalUser.find((user) => user.email === searchUser);
+        setResultUser(findUser);
     }
     return (
         <Container>
@@ -29,9 +39,16 @@ function Contact() {
                     <CiSearch size={28} />
                 </SearchIcon>
             </SearchContainer>
-            {totalUser && (
+            {resultUser && (
+                <AddContact
+                    user={resultUser}
+                    currUserContactList={currUserContactList}
+                    setResultUser={setResultUser}
+                />
+            )}
+            {currUserContactList !== null && (
                 <div>
-                    {totalUser.map((user) => (
+                    {currUserContactList.map((user) => (
                         <SingleContact user={user} />
                     ))}
                 </div>
