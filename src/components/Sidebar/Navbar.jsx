@@ -13,7 +13,6 @@ function Navbar({ setShowContact, showContact, setShowProfile }) {
     }, []);
     return (
         <NavbarContainer>
-            <Logo>Chat</Logo>
             <User onClick={() => setShowProfile(true)}>
                 <Avatar height={"50px"} width={"50px"} />
                 {loginUser && <span>{loginUser.username}</span>}

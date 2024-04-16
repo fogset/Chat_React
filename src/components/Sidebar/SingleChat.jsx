@@ -37,7 +37,6 @@ const Container = styled.div`
     padding: 10px;
     display: flex;
     align-items: center;
-
     gap: 10px;
     color: white;
     cursor: pointer;
