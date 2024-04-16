@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { updateContactbyEmail } from "../../Firebase/Update";
-import Avatar from "./../Avatar";
+import { updateContactbyEmail } from "../../../Firebase/Update";
+import Avatar from "../../Avatar";
 import { useState, useEffect } from "react";
-import { CreateNewConversationbyEmail } from "../../Firebase/Add";
+import { CreateNewConversationbyEmail } from "../../../Firebase/Add";
 
 function AddContact({ user, currUserContactList, setResultUser }) {
     const loginUserEmail = JSON.parse(localStorage.getItem("LoginUserEmail"));

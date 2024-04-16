@@ -5,12 +5,11 @@ import { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import AddContact from "./AddContact";
 import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "./../../firebase";
+import { db } from "../../../firebase";
 
-function Contact() {
+function Contact({ currUserContactList }) {
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const [totalUser, setTotalUser] = useState(null);
-    const [currUserContactList, setCurrUserContactList] = useState(null);
     const [searchUser, setSearchUser] = useState(null);
     const [resultUser, setResultUser] = useState(null);
 
@@ -18,11 +17,6 @@ function Contact() {
         const data = JSON.parse(localStorage.getItem("totalUsers"));
         setTotalUser(data);
     }, []);
-    const currUserContactListFirebase = onSnapshot(doc(db, "users", email), (doc) => {
-        if (doc.data().contact !== null) {
-            setCurrUserContactList(doc.data().contact);
-        }
-    });
     function onClickSearch() {
         const findUser = totalUser.find((user) => user.email === searchUser);
         setResultUser(findUser);

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Avatar from "../Avatar";
+import Avatar from "../../Avatar";
 
 function SingleContact({ user }) {
     return (
