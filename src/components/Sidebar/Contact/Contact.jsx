@@ -55,7 +55,7 @@ function Contact({ currUserContactList }) {
 
 export default Contact;
 const Container = styled.div`
-    height: calc(100% - 110px);
+    height: calc(100% - 70px);
     overflow: scroll;
     overflow-x: hidden;
 `;

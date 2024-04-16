@@ -5,12 +5,14 @@ import Add from "../img/add.png";
 import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
-import { useRecoilState } from "recoil";
-import { login_UserRecoil } from "./../globalVariable";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { login_UserRecoil, currentChatContactRecoil } from "./../globalVariable";
 import { signOut } from "firebase/auth";
 import { auth } from "./../firebase.js";
+import Avatar from "./Avatar.jsx";
 
 function Chat() {
+    const otherContact = useRecoilValue(currentChatContactRecoil);
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     function handleSignOut() {
         signOut(auth)
@@ -24,7 +26,8 @@ function Chat() {
     return (
         <Container>
             <ChatInfo>
-                <span>Jane</span>
+                {otherContact && <Name>{otherContact.username}</Name>}
+                <Avatar height={"60px"} width={"60px"} shape={"10px"} />
                 <Button onClick={handleSignOut}>Logout</Button>
             </ChatInfo>
             <Messages />
@@ -40,13 +43,20 @@ const Container = styled.div`
     width: 100%;
 `;
 const ChatInfo = styled.div`
+    position: relative;
     height: 50px;
     background-color: #5d5b8d;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 10px;
     color: lightgray;
+`;
+
+const Name = styled.div`
+    font-size: xx-large;
+    color: #fcf9ae;
+    margin-right: 10%;
 `;
 const ChatIcons = styled.div`
     display: flex;
@@ -57,6 +67,8 @@ const ChatIcons = styled.div`
     }
 `;
 const Button = styled.button`
+    position: absolute;
+    right: 10px;
     background-color: #5d5b8d;
     color: #ddddf7;
     font-size: 10px;

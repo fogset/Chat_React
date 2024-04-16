@@ -1,11 +1,9 @@
 import React from "react";
 import Message from "./Message";
 import styled from "styled-components";
-import { MessageData } from "../data/MessageData";
-import { GetMessageListById } from "../Firebase/Get";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./../firebase";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { currentChatContactRecoil } from "./../globalVariable";
 
