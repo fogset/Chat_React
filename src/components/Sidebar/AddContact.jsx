@@ -21,12 +21,12 @@ function AddContact({ user, currUserContactList, setResultUser }) {
                 messageId: newMessageId,
                 username: user.username,
             };
-            if (currUserContactList === null) {
-                setAddContact(contact);
-            } else {
-                setAddContact([...currUserContactList, contact]);
-            }
-            updateContactbyEmail(loginUserEmail, addContact);
+            // if (currUserContactList === null) {
+            //     setAddContact(contact);
+            // } else {
+            //     setAddContact([...currUserContactList, contact]);
+            // }
+            updateContactbyEmail(loginUserEmail, contact);
         }
     }, [newMessageId]);
     return (
