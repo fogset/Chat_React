@@ -46,7 +46,7 @@ function Register({ setIfLogin }) {
                 profile: "",
                 createdAt: serverTimestamp(),
             });
-            alert("added");
+            alert(userCredentials.username + "added");
         } catch (error) {
             console.log(error);
         }

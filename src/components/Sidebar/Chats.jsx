@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import SingleChat from "./SingleChat";
-import { useState, useEffect } from "react";
-function Chats() {
-    const [contactList, setContactList] = useState(null);
-    useEffect(() => {
-        const data = JSON.parse(localStorage.getItem("LoginUser"));
-        setContactList(data.contact);
-    }, []);
-
-    return <Container></Container>;
+function Chats({ currUserContactList }) {
+    return (
+        <Container>
+            {currUserContactList !== null && (
+                <div>
+                    {currUserContactList.map((contact) => (
+                        <SingleChat contact={contact} />
+                    ))}
+                </div>
+            )}
+        </Container>
+    );
 }
 
 export default Chats;
@@ -18,12 +21,3 @@ const Container = styled.div`
     overflow: scroll;
     overflow-x: hidden;
 `;
-// {
-//     contactList !== null && (
-//         <div>
-//             {contactList.map((contact) => (
-//                 <SingleChat contact={contact} />
-//             ))}
-//         </div>
-//     );
-// }
