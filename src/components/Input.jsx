@@ -11,16 +11,15 @@ import { currentChatContactRecoil } from "./../globalVariable";
 // import ImagePath from ../img/cam.png
 function Input() {
     const [message, setMessage] = useState(null);
-    const [messageList, setMessageList] = useState([]);
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const otherContact = useRecoilValue(currentChatContactRecoil);
     function sendMessage() {
-        messageList.push({
+        const newMessage = {
             message: message,
             sender: email,
             createdAt: Date().toLocaleString(),
-        });
-        updateMessagebyId(messageList, otherContact.messageId);
+        };
+        updateMessagebyId(newMessage, otherContact.messageId);
     }
     return (
         <Container>

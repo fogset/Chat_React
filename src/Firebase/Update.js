@@ -21,10 +21,10 @@ export const updateUserProfile = async (username, description, email) => {
         description: description,
     });
 };
-export const updateMessagebyId = async (messageList, messageId) => {
+export const updateMessagebyId = async (newMessage, messageId) => {
     const messageRef = doc(db, "messages", messageId);
     await updateDoc(messageRef, {
-        messageList: messageList,
+        messageList: arrayUnion(newMessage),
     });
     console.log("updateMessagebyId ID: ", messageRef.id);
 };
