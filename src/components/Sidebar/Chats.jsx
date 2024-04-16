@@ -9,17 +9,7 @@ function Chats() {
         setContactList(data.contact);
     }, []);
 
-    return (
-        <Container>
-            {contactList !== null && (
-                <div>
-                    {contactList.map((contact) => (
-                        <SingleChat contact={contact} />
-                    ))}
-                </div>
-            )}
-        </Container>
-    );
+    return <Container></Container>;
 }
 
 export default Chats;
@@ -28,3 +18,12 @@ const Container = styled.div`
     overflow: scroll;
     overflow-x: hidden;
 `;
+// {
+//     contactList !== null && (
+//         <div>
+//             {contactList.map((contact) => (
+//                 <SingleChat contact={contact} />
+//             ))}
+//         </div>
+//     );
+// }

@@ -20,3 +20,12 @@ export const AddMessagebyEmail = async (messageList) => {
     });
     console.log("Document written with ID: ", messageRef.id);
 };
+export const CreateNewConversationbyEmail = async (email1, email2, setNewMessageId) => {
+    const messageRef = await addDoc(collection(db, "messages"), {
+        contact1: email1,
+        contact2: email2,
+        messageList: null,
+    });
+    setNewMessageId(messageRef.id);
+    //console.log("Document written with ID: ", messageRef.id);
+};

@@ -19,7 +19,9 @@ function Contact() {
         setTotalUser(data);
     }, []);
     const currUserContactListFirebase = onSnapshot(doc(db, "users", email), (doc) => {
-        setCurrUserContactList(doc.data().contact);
+        if (doc.data().contact !== null) {
+            setCurrUserContactList(doc.data().contact);
+        }
     });
     function onClickSearch() {
         const findUser = totalUser.find((user) => user.email === searchUser);

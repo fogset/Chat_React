@@ -3,30 +3,32 @@ import styled from "styled-components";
 import { updateContactbyEmail } from "../../Firebase/Update";
 import Avatar from "./../Avatar";
 import { useState, useEffect } from "react";
+import { CreateNewConversationbyEmail } from "../../Firebase/Add";
 function AddContact({ user, currUserContactList, setResultUser }) {
     const loginUserEmail = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const [addContact, setAddContact] = useState([]);
-    const contact = {
-        email: user.email,
-        messageId: null,
-        username: user.username,
-    };
+    const [newMessageId, setNewMessageId] = useState(null);
     function addUser() {
-        if (currUserContactList === null) {
-            setAddContact(contact);
-        } else {
-            setAddContact([...currUserContactList, contact]);
-        }
-        updateContactbyEmail(loginUserEmail, addContact);
-        //setResultUser(null);
+        CreateNewConversationbyEmail(loginUserEmail, user.email, setNewMessageId);
     }
     function clearInput() {
         setAddContact([]);
     }
     useEffect(() => {
-        console.log("addContac");
-        console.log(addContact);
-    }, []);
+        if (newMessageId !== null) {
+            const contact = {
+                email: user.email,
+                messageId: newMessageId,
+                username: user.username,
+            };
+            if (currUserContactList === null) {
+                setAddContact(contact);
+            } else {
+                setAddContact([...currUserContactList, contact]);
+            }
+            updateContactbyEmail(loginUserEmail, addContact);
+        }
+    }, [newMessageId]);
     return (
         <Container>
             <Avatar height={"50px"} width={"50px"} />
