@@ -3,14 +3,7 @@ import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "../globalVariable";
 import { db } from "./../firebase";
-import {
-    doc,
-    setDoc,
-    collection,
-    addDoc,
-    serverTimestamp,
-    getDoc,
-} from "firebase/firestore";
+import { doc, setDoc, collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { GetUserByEmail } from "../Firebase/Get";
 
@@ -29,11 +22,7 @@ function Register({ setIfLogin }) {
     function handleSignup(e) {
         e.preventDefault();
         setError(null);
-        createUserWithEmailAndPassword(
-            auth,
-            userCredentials.email,
-            userCredentials.password
-        )
+        createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 AddUserToFirebase();
@@ -50,9 +39,10 @@ function Register({ setIfLogin }) {
     const AddUserToFirebase = async () => {
         try {
             await setDoc(doc(db, "users", userCredentials.email), {
+                contact: [],
                 username: userCredentials.username,
                 email: userCredentials.email,
-                desc: "Hello from my country 😀",
+                desc: "Write a description😀",
                 profile: "",
                 createdAt: serverTimestamp(),
             });
