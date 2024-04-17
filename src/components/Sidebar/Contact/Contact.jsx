@@ -35,13 +35,7 @@ function Contact({ currUserContactList }) {
                     <CiSearch size={28} />
                 </SearchIcon>
             </SearchContainer>
-            {resultUser && (
-                <AddContact
-                    user={resultUser}
-                    currUserContactList={currUserContactList}
-                    setResultUser={setResultUser}
-                />
-            )}
+            {resultUser && <AddContact newContact={resultUser} setResultUser={setResultUser} />}
             {currUserContactList !== null && (
                 <div>
                     {currUserContactList.map((user) => (

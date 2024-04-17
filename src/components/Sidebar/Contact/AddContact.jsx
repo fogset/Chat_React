@@ -4,32 +4,39 @@ import { updateContactbyEmail } from "../../../Firebase/Update";
 import Avatar from "../../Avatar";
 import { useState, useEffect } from "react";
 import { CreateNewConversationbyEmail } from "../../../Firebase/Add";
+import { useRecoilValue } from "recoil";
+import { currentChatContactRecoil } from "./../../../globalVariable";
 
-function AddContact({ user, currUserContactList, setResultUser }) {
-    const loginUserEmail = JSON.parse(localStorage.getItem("LoginUserEmail"));
-    const [addContact, setAddContact] = useState([]);
+function AddContact({ newContact, setResultUser }) {
+    const loginUser = JSON.parse(localStorage.getItem("LoginUser"));
     const [newMessageId, setNewMessageId] = useState(null);
-
+    const otherContact = useRecoilValue(currentChatContactRecoil);
     function addUser() {
-        CreateNewConversationbyEmail(loginUserEmail, user.email, setNewMessageId);
+        CreateNewConversationbyEmail(loginUser.email, newContact.email, setNewMessageId);
     }
     function clearInput() {
-        setAddContact([]);
+        // setAddContact([]);
     }
     useEffect(() => {
         if (newMessageId !== null) {
-            const contact = {
-                email: user.email,
+            const otherContact = {
+                email: newContact.email,
                 messageId: newMessageId,
-                username: user.username,
+                username: newContact.username,
             };
-            updateContactbyEmail(loginUserEmail, contact);
+            const currContact = {
+                email: loginUser.email,
+                messageId: newMessageId,
+                username: loginUser.username,
+            };
+            updateContactbyEmail(loginUser.email, otherContact);
+            updateContactbyEmail(newContact.email, currContact);
         }
     }, [newMessageId]);
     return (
         <Container>
             <Avatar height={"50px"} width={"50px"} />
-            <UserChatInfo>{user.email}</UserChatInfo>
+            <UserChatInfo>{newContact.email}</UserChatInfo>
             <Add onClick={addUser}>Add</Add>
         </Container>
     );
