@@ -4,13 +4,10 @@ import { updateContactbyEmail } from "../../../Firebase/Update";
 import Avatar from "../../Avatar";
 import { useState, useEffect } from "react";
 import { CreateNewConversationbyEmail } from "../../../Firebase/Add";
-import { useRecoilValue } from "recoil";
-import { currentChatContactRecoil } from "./../../../globalVariable";
 
 function AddContact({ newContact, setResultUser }) {
     const loginUser = JSON.parse(localStorage.getItem("LoginUser"));
     const [newMessageId, setNewMessageId] = useState(null);
-    const otherContact = useRecoilValue(currentChatContactRecoil);
     function addUser() {
         CreateNewConversationbyEmail(loginUser.email, newContact.email, setNewMessageId);
     }
@@ -24,13 +21,13 @@ function AddContact({ newContact, setResultUser }) {
                 messageId: newMessageId,
                 username: newContact.username,
             };
-            const currContact = {
+            const LoginUser = {
                 email: loginUser.email,
                 messageId: newMessageId,
                 username: loginUser.username,
             };
             updateContactbyEmail(loginUser.email, otherContact);
-            updateContactbyEmail(newContact.email, currContact);
+            updateContactbyEmail(newContact.email, LoginUser);
         }
     }, [newMessageId]);
     return (
