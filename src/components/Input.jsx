@@ -7,9 +7,12 @@ import { serverTimestamp } from "firebase/firestore";
 import { updateMessagebyId } from "../Firebase/Update";
 import { useRecoilValue } from "recoil";
 import { currentChatContactRecoil } from "./../globalVariable";
+import EmojiPicker from "emoji-picker-react";
+import { MdOutlineEmojiEmotions } from "react-icons/md";
 
 // import ImagePath from ../img/cam.png
 function Input() {
+    const [openEmoji, setOpenEmoji] = useState(false);
     const [message, setMessage] = useState(null);
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const otherContact = useRecoilValue(currentChatContactRecoil);
@@ -21,21 +24,29 @@ function Input() {
         };
         updateMessagebyId(newMessage, otherContact.messageId);
     }
+    function handelEmoji(e) {
+        //console.log(e);
+        setMessage(message + e.emoji);
+    }
     return (
         <Container>
             <StyledTextarea
                 type="text"
                 placeholder="send message "
+                value={message}
                 onChange={(e) => setMessage(e.target.value)}
             />
             <Send>
-                <Image src={Attach} />
+                <MdOutlineEmojiEmotions size={35} onClick={() => setOpenEmoji(!openEmoji)} />
                 <InputContainer type="file" style={{ display: "none" }} id="file" />
                 <label htmlFor="file">
                     <img src={Img} />
                 </label>
                 <Button onClick={sendMessage}>Send</Button>
             </Send>
+            <EmojiContainer>
+                <EmojiPicker open={openEmoji} onEmojiClick={handelEmoji} />
+            </EmojiContainer>
         </Container>
     );
 }
@@ -63,9 +74,10 @@ const InputContainer = styled.input`
     }
 `;
 const Send = styled.div`
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     margin-right: 50px;
 `;
 const Image = styled.img`
@@ -88,4 +100,9 @@ const StyledTextarea = styled.textarea`
     outline: none;
     height: 100%;
     width: 100%;
+`;
+const EmojiContainer = styled.div`
+    position: absolute;
+    right: 20px;
+    bottom: 70px;
 `;
