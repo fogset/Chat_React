@@ -23,11 +23,7 @@ function Messages() {
             {messageList !== null && (
                 <div>
                     {messageList.map((message) => (
-                        <Message
-                            msssage={message}
-                            sender={message.sender}
-                            id={otherContact.messageId}
-                        />
+                        <Message msssage={message} sender={message.sender} />
                     ))}
                 </div>
             )}

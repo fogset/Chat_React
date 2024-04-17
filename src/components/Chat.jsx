@@ -26,7 +26,11 @@ function Chat() {
     return (
         <Container>
             <ChatInfo>
-                {otherContact && <Name>{otherContact.username}</Name>}
+                {otherContact && (
+                    <Name>
+                        {otherContact.username}---{otherContact.messageId}
+                    </Name>
+                )}
                 <Avatar height={"60px"} width={"60px"} shape={"10px"} />
                 <Button onClick={handleSignOut}>Logout</Button>
             </ChatInfo>
