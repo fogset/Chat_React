@@ -5,18 +5,34 @@ import { FaEdit } from "react-icons/fa";
 import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
 import { updateUserProfile } from "../../Firebase/Update";
+import { uploadImage } from "../../Firebase/upload";
 
 function Profile({ setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
     const [userName, setUserName] = useState(null);
     const [description, setDescription] = useState(null);
     const [loginUser, setLoginUser] = useState(null);
+    const [profileImage, setProfileImage] = useState(null);
+    const date = new Date();
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("LoginUser"));
         setLoginUser(data);
     }, []);
     function SaveToFireBase() {
         updateUserProfile(userName, description, loginUser.email);
+    }
+    function handleImage(e) {
+        const file = e.target.files[0];
+        const Image = {
+            orgin: file.name,
+            filename: date + "-" + file.name,
+            file,
+        };
+        setProfileImage(Image);
+        uploadImage(file);
+        // console.log(profileImage);
+        // const date = new Date();
+        // alert(date);
     }
 
     return (
@@ -32,9 +48,21 @@ function Profile({ setShowProfile }) {
             {onEdit === true && (
                 <ProfileInfos>
                     <AvatarWrapper>
-                        <Avatar height={"150px"} width={"150px"} shape={"30px"} />
+                        <Avatar
+                            src={profileImage ? URL.createObjectURL(profileImage.file) : ""}
+                            height={"150px"}
+                            width={"150px"}
+                            shape={"30px"}
+                        />
                         <CameraIcon>
                             <FaCamera size={30} />
+                            <input
+                                label="Image"
+                                placeholder="Choose image"
+                                accept="image/png,image/jpeg"
+                                type="file"
+                                onChange={handleImage}
+                            />
                         </CameraIcon>
                     </AvatarWrapper>
                     <ProfileForm onSubmit={() => {}}>
