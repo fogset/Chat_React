@@ -9,8 +9,8 @@ import { useRecoilValue } from "recoil";
 import { currentChatContactRecoil } from "./../globalVariable";
 import EmojiPicker from "emoji-picker-react";
 import { MdOutlineEmojiEmotions } from "react-icons/md";
+import moment from "moment";
 
-// import ImagePath from ../img/cam.png
 function Input() {
     const [openEmoji, setOpenEmoji] = useState(false);
     const [message, setMessage] = useState(null);
@@ -20,7 +20,7 @@ function Input() {
         const newMessage = {
             message: message,
             sender: email,
-            createdAt: Date().toLocaleString(),
+            createdAt: moment().format("LLL"),
         };
         updateMessagebyId(newMessage, otherContact.messageId);
     }

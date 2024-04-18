@@ -30,6 +30,10 @@ const OwnerMessage = styled.div`
     text-align: right;
     display: flex;
     flex-direction: column;
+    span {
+        margin-top: 0px;
+        font-size: 15px;
+    }
 `;
 const OwnerContent = styled.div`
     background-color: purple;
@@ -52,5 +56,6 @@ const OtherMessage = styled.div`
     }
     span {
         margin-top: 0px;
+        font-size: 15px;
     }
 `;
