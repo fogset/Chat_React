@@ -14,7 +14,6 @@ function Profile({ setShowProfile }) {
     const [description, setDescription] = useState(null);
     const [loginUser, setLoginUser] = useState(null);
     const [profileImage, setProfileImage] = useState(null);
-    const date = new Date();
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("LoginUser"));
         setLoginUser(data);

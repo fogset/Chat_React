@@ -4,11 +4,8 @@ import SingleContact from "./SingleContact";
 import { useState, useEffect } from "react";
 import { CiSearch } from "react-icons/ci";
 import AddContact from "./AddContact";
-import { doc, onSnapshot } from "firebase/firestore";
-import { db } from "../../../firebase";
 
 function Contact({ currUserContactList }) {
-    const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
     const [totalUser, setTotalUser] = useState(null);
     const [searchUser, setSearchUser] = useState(null);
     const [resultUser, setResultUser] = useState(null);

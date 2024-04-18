@@ -49,13 +49,6 @@ const User = styled.div`
         margin-right: 15px;
     }
 `;
-const Image = styled.img`
-    background-color: #ddddf7;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-`;
 
 const Button = styled.button`
     background-color: #5d5b8d;

@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { login_UserRecoil } from "./globalVariable";
 import { Route, Routes } from "react-router-dom";
 import LoginOrSignUp from "./pages/LoginOrSignUp";
-import Messenger from "./pages/Home";
+import Messenger from "./pages/Messenger";
 import Profile from "./components/Sidebar/Profile";
 
 function App() {
