@@ -20,11 +20,13 @@ function AddContact({ newContact, setResultUser }) {
                 email: newContact.email,
                 messageId: newMessageId,
                 username: newContact.username,
+                profileImg: newContact.profileImg,
             };
             const LoginUser = {
                 email: loginUser.email,
                 messageId: newMessageId,
                 username: loginUser.username,
+                profileImg: loginUser.profileImg,
             };
             updateContactbyEmail(loginUser.email, otherContact);
             updateContactbyEmail(newContact.email, LoginUser);

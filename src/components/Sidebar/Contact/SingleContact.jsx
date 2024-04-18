@@ -5,7 +5,7 @@ import Avatar from "../../Avatar";
 function SingleContact({ user }) {
     return (
         <Container>
-            <Avatar height={"50px"} width={"50px"} />
+            <Avatar height={"50px"} width={"50px"} src={user.profileImg} />
             <UserChatInfo>
                 <Name>{user.username}</Name>
                 <Email>{user.email}</Email>

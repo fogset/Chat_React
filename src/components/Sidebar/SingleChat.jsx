@@ -10,7 +10,7 @@ function SingleChat({ contact }) {
     }
     return (
         <Container onClick={contactSelect}>
-            <Avatar height={"50px"} width={"50px"} />
+            <Avatar height={"50px"} width={"50px"} src={contact.profileImg} />
             <UserChatInfo>
                 <AvatarInfo>
                     <span>{contact.email}</span>

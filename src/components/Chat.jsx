@@ -31,7 +31,14 @@ function Chat() {
                         {otherContact.username}---{otherContact.messageId}
                     </Name>
                 )}
-                <Avatar height={"60px"} width={"60px"} shape={"10px"} />
+                {otherContact && (
+                    <Avatar
+                        height={"60px"}
+                        width={"60px"}
+                        shape={"10px"}
+                        src={otherContact.profileImg}
+                    />
+                )}
                 <Button onClick={handleSignOut}>Logout</Button>
             </ChatInfo>
             <Messages />
