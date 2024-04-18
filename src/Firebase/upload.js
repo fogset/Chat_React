@@ -1,8 +1,8 @@
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./../firebase";
-
+import moment from "moment";
 export const uploadImage = async (file) => {
-    const date = new Date();
+    const date = moment().format("LL");
     const storageRef = ref(storage, "profileImage/" + date + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(
@@ -25,6 +25,7 @@ export const uploadImage = async (file) => {
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 console.log("File available at", downloadURL);
+                localStorage.setItem("profileImgUrl", JSON.stringify(downloadURL));
             });
         }
     );

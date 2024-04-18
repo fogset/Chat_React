@@ -14,7 +14,7 @@ function Navbar({ setShowContact, showContact, setShowProfile }) {
     return (
         <NavbarContainer>
             <User onClick={() => setShowProfile(true)}>
-                <Avatar height={"50px"} width={"50px"} />
+                {loginUser && <Avatar height={"50px"} width={"50px"} src={loginUser.profileImg} />}
                 {loginUser && <span>{loginUser.username}</span>}
             </User>
             <Button onClick={ShowContactList}>{showContact ? "Contacts" : "Chats"}</Button>
