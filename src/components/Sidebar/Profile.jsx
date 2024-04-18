@@ -6,6 +6,7 @@ import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
 import { updateUserProfile } from "../../Firebase/Update";
 import { uploadImage } from "../../Firebase/upload";
+import moment from "moment";
 
 function Profile({ setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
@@ -19,20 +20,15 @@ function Profile({ setShowProfile }) {
         setLoginUser(data);
     }, []);
     function SaveToFireBase() {
-        updateUserProfile(userName, description, loginUser.email);
+        setTimeout(() => {
+            const profileUrl = JSON.parse(localStorage.getItem("profileImgUrl"));
+            updateUserProfile(userName, description, loginUser.email, profileUrl);
+        }, 3000);
     }
     function handleImage(e) {
         const file = e.target.files[0];
-        const Image = {
-            orgin: file.name,
-            filename: date + "-" + file.name,
-            file,
-        };
-        setProfileImage(Image);
+        setProfileImage(file);
         uploadImage(file);
-        // console.log(profileImage);
-        // const date = new Date();
-        // alert(date);
     }
 
     return (
@@ -48,15 +44,17 @@ function Profile({ setShowProfile }) {
             {onEdit === true && (
                 <ProfileInfos>
                     <AvatarWrapper>
-                        <Avatar
-                            src={profileImage ? URL.createObjectURL(profileImage.file) : ""}
-                            height={"150px"}
-                            width={"150px"}
-                            shape={"30px"}
-                        />
+                        {loginUser && (
+                            <Avatar
+                                src={loginUser.profileImg}
+                                height={"150px"}
+                                width={"150px"}
+                                shape={"30px"}
+                            />
+                        )}
                         <CameraIcon>
                             <FaCamera size={30} />
-                            <input
+                            <ImageInput
                                 label="Image"
                                 placeholder="Choose image"
                                 accept="image/png,image/jpeg"
@@ -65,6 +63,7 @@ function Profile({ setShowProfile }) {
                             />
                         </CameraIcon>
                     </AvatarWrapper>
+
                     <ProfileForm onSubmit={() => {}}>
                         <input
                             type="text"
@@ -88,7 +87,14 @@ function Profile({ setShowProfile }) {
             {onEdit === false && (
                 <ProfileInfos>
                     <AvatarWrapper>
-                        <Avatar height={"150px"} width={"150px"} shape={"30px"} />
+                        {loginUser && (
+                            <Avatar
+                                src={loginUser.profileImg}
+                                height={"150px"}
+                                width={"150px"}
+                                shape={"30px"}
+                            />
+                        )}
                     </AvatarWrapper>
                     {loginUser && (
                         <ProfileDetail>
@@ -238,8 +244,17 @@ const Editbutton = styled.button`
 `;
 const CameraIcon = styled.div`
     position: absolute;
-    z-index: 10;
-    bottom: 0px;
-    right: 5px;
+    z-index: 100;
+    bottom: 10px;
+    right: 10px;
     color: white;
+`;
+const ImageInput = styled.input`
+    position: absolute;
+    z-index: 100;
+    bottom: 5px;
+    left: -10px;
+    color: white;
+    height: 30px;
+    opacity: 0%;
 `;

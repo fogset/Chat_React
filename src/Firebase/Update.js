@@ -14,11 +14,12 @@ import {
     query,
     orderBy,
 } from "firebase/firestore";
-export const updateUserProfile = async (username, description, email) => {
+export const updateUserProfile = async (username, description, email, profileUrl) => {
     const profileRef = doc(db, "users", email);
     await updateDoc(profileRef, {
         username: username,
         description: description,
+        profileImg: profileUrl,
     });
 };
 export const updateMessagebyId = async (newMessage, messageId) => {
