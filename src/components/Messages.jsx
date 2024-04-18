@@ -3,7 +3,7 @@ import Message from "./Message";
 import styled from "styled-components";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./../firebase";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { currentChatContactRecoil } from "./../globalVariable";
 
@@ -17,9 +17,17 @@ function Messages() {
             });
         }
     });
+    let tableRef = useRef(null);
+    useEffect(() => {
+        scrollToBottom();
+    }, [messageList]);
+
+    function scrollToBottom() {
+        tableRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
 
     return (
-        <Container>
+        <Container onClick={scrollToBottom}>
             {messageList !== null && (
                 <div>
                     {messageList.map((message) => (
@@ -27,6 +35,7 @@ function Messages() {
                     ))}
                 </div>
             )}
+            <div ref={tableRef} />
         </Container>
     );
 }
