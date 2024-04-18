@@ -1,33 +1,14 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { auth, app } from "../firebase";
-import {
-    sendPasswordResetEmail,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-} from "firebase/auth";
-import { useRecoilState } from "recoil";
-import { login_UserRecoil } from "../globalVariable";
+import { auth } from "../firebase";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 function Login({ setIfLogin }) {
-    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            const uid = user.uid;
-            setLoginUser({
-                id: user.uid,
-                email: user.email,
-            });
-            localStorage.setItem("LoginUserEmail", JSON.stringify(user.email));
-        } else {
-            setLoginUser(null);
-        }
-    });
+    const user = auth.currentUser;
 
     function handleCredentials(e) {
         setUserCredentials({
@@ -42,6 +23,8 @@ function Login({ setIfLogin }) {
         signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then((userCredential) => {
                 navigate(`/loginUser/${userCredential.user.uid}`);
+                console.log("signIn");
+                console.log(user);
             })
             .catch((error) => {
                 setError(error.message);

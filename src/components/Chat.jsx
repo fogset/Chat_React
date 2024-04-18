@@ -13,12 +13,9 @@ import Avatar from "./Avatar.jsx";
 
 function Chat() {
     const otherContact = useRecoilValue(currentChatContactRecoil);
-    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     function handleSignOut() {
         signOut(auth)
-            .then(() => {
-                setLoginUser(null);
-            })
+            .then(() => {})
             .catch((error) => {
                 console.log(error);
             });
