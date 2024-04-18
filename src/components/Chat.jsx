@@ -26,11 +26,7 @@ function Chat() {
     return (
         <Container>
             <ChatInfo>
-                {otherContact && (
-                    <Name>
-                        {otherContact.username}---{otherContact.messageId}
-                    </Name>
-                )}
+                {otherContact && <Name>{otherContact.username}</Name>}
                 {otherContact && (
                     <Avatar
                         height={"60px"}
@@ -67,7 +63,7 @@ const ChatInfo = styled.div`
 const Name = styled.div`
     font-size: xx-large;
     color: #fcf9ae;
-    margin-right: 10%;
+    margin-right: 5%;
 `;
 const ChatIcons = styled.div`
     display: flex;

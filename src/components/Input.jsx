@@ -23,6 +23,7 @@ function Input() {
             createdAt: moment().format("LLL"),
         };
         updateMessagebyId(newMessage, otherContact.messageId);
+        setMessage("");
     }
     function handelEmoji(e) {
         //console.log(e);
@@ -35,6 +36,7 @@ function Input() {
                 placeholder="send message "
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={(e) => (e.key === "Enter" ? sendMessage() : null)}
             />
             <Send>
                 <MdOutlineEmojiEmotions size={35} onClick={() => setOpenEmoji(!openEmoji)} />

@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Avatar from "./Avatar";
+import { useRecoilValue } from "recoil";
+import { currentChatContactRecoil } from "./../globalVariable";
 function Message({ msssage, sender }) {
     const email = JSON.parse(localStorage.getItem("LoginUserEmail"));
+    const otherContact = useRecoilValue(currentChatContactRecoil);
     return (
         <Container>
             {sender === email && (
@@ -13,8 +16,16 @@ function Message({ msssage, sender }) {
             )}
             {sender !== email && (
                 <OtherMessage>
-                    <p>{msssage.message}</p>
-                    <span>{msssage.createdAt}</span>
+                    <Avatar
+                        src={otherContact.profileImg}
+                        height={"40px"}
+                        width={"40px"}
+                        shape={"10px"}
+                    />
+                    <MessageInfo>
+                        <p>{msssage.message}</p>
+                        <span>{msssage.createdAt}</span>
+                    </MessageInfo>
                 </OtherMessage>
             )}
         </Container>
@@ -46,6 +57,10 @@ const OwnerContent = styled.div`
 const OtherMessage = styled.div`
     max-width: 80%;
     display: flex;
+    margin-left: -5px;
+`;
+
+const MessageInfo = styled.div`
     flex-direction: column;
     p {
         background-color: white;
@@ -53,6 +68,7 @@ const OtherMessage = styled.div`
         border-radius: 10px 10px 10px 10px;
         max-width: max-content;
         margin-bottom: 0px;
+        margin-top: 0px;
     }
     span {
         margin-top: 0px;
