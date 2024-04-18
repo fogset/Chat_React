@@ -1,19 +1,12 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
-import { login_UserRecoil } from "../globalVariable";
-import { db } from "./../firebase";
-import { doc, setDoc, collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { GetUserByEmail } from "../Firebase/Get";
 import { AddUserToFirebase } from "../Firebase/Add";
 
 function Register({ setIfLogin }) {
-    const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
     const auth = getAuth();
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
-    const [test, setTest] = useState(null);
     function handleCredentials(e) {
         setUserCredentials({
             ...userCredentials,
@@ -26,7 +19,6 @@ function Register({ setIfLogin }) {
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then((userCredential) => {
                 AddUserToFirebase(userCredentials.email, userCredentials.username);
-                setLoginUser(userCredentials.email);
             })
             .catch((error) => {
                 setError(error.message);
@@ -36,17 +28,11 @@ function Register({ setIfLogin }) {
         setIfLogin(true);
     }
 
-    function Test() {
-        const UserInfo = GetUserByEmail(userCredentials.email, setTest);
-        console.log("UserInfo.email loginUser");
-        console.log(test.email);
-    }
-
     return (
         <Container>
             <Wrapper>
-                <Logo onClick={AddUserToFirebase}>Lama Chat</Logo>
-                <Title onClick={Test}>Register</Title>
+                <Logo>Lama Chat</Logo>
+                <Title>Register</Title>
                 <Form>
                     <Input
                         onChange={(e) => {

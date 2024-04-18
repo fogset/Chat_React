@@ -8,7 +8,6 @@ function Login({ setIfLogin }) {
     const [userCredentials, setUserCredentials] = useState({});
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const user = auth.currentUser;
 
     function handleCredentials(e) {
         setUserCredentials({
@@ -23,8 +22,6 @@ function Login({ setIfLogin }) {
         signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then((userCredential) => {
                 navigate(`/loginUser/${userCredential.user.uid}`);
-                console.log("signIn");
-                console.log(user);
             })
             .catch((error) => {
                 setError(error.message);
