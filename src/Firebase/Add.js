@@ -29,3 +29,18 @@ export const CreateNewConversationbyEmail = async (email1, email2, setNewMessage
     setNewMessageId(messageRef.id);
     //console.log("Document written with ID: ", messageRef.id);
 };
+export const AddUserToFirebase = async (email, username) => {
+    try {
+        await setDoc(doc(db, "users", email), {
+            contact: [],
+            username: username,
+            email: email,
+            description: "Write a description😀",
+            profile: "",
+            createdAt: serverTimestamp(),
+        });
+        alert(email + " --  " + "added");
+    } catch (error) {
+        console.log(error);
+    }
+};

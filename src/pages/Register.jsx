@@ -6,6 +6,7 @@ import { db } from "./../firebase";
 import { doc, setDoc, collection, addDoc, serverTimestamp, getDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { GetUserByEmail } from "../Firebase/Get";
+import { AddUserToFirebase } from "../Firebase/Add";
 
 function Register({ setIfLogin }) {
     const [loginUser, setLoginUser] = useRecoilState(login_UserRecoil);
@@ -24,10 +25,8 @@ function Register({ setIfLogin }) {
         setError(null);
         createUserWithEmailAndPassword(auth, userCredentials.email, userCredentials.password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                AddUserToFirebase();
-                const UserInfo = GetUserByEmail(userCredentials.email);
-                setLoginUser(UserInfo);
+                AddUserToFirebase(userCredentials.email, userCredentials.username);
+                setLoginUser(userCredentials.email);
             })
             .catch((error) => {
                 setError(error.message);
@@ -36,21 +35,7 @@ function Register({ setIfLogin }) {
     function Login() {
         setIfLogin(true);
     }
-    const AddUserToFirebase = async () => {
-        try {
-            await setDoc(doc(db, "users", userCredentials.email), {
-                contact: [],
-                username: userCredentials.username,
-                email: userCredentials.email,
-                desc: "Write a description😀",
-                profile: "",
-                createdAt: serverTimestamp(),
-            });
-            alert(userCredentials.email + " --  " + "added");
-        } catch (error) {
-            console.log(error);
-        }
-    };
+
     function Test() {
         const UserInfo = GetUserByEmail(userCredentials.email, setTest);
         console.log("UserInfo.email loginUser");
