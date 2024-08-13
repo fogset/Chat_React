@@ -39,7 +39,7 @@ function Login({ setIfLogin }) {
     return (
         <Container>
             <Wrapper>
-                <Logo>Lama Chat</Logo>
+                <Logo>Chat React</Logo>
                 <Title>Login</Title>
                 <Form>
                     <Input

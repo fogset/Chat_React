@@ -31,7 +31,7 @@ function Register({ setIfLogin }) {
     return (
         <Container>
             <Wrapper>
-                <Logo>Lama Chat</Logo>
+                <Logo>Chat React</Logo>
                 <Title>Register</Title>
                 <Form>
                     <Input
