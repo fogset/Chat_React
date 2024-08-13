@@ -17,13 +17,17 @@ function Messages() {
             });
         }
     });
-    let tableRef = useRef(null);
+
+    const bottomRef = useRef(null);
     useEffect(() => {
         scrollToBottom();
     }, [messageList]);
 
     function scrollToBottom() {
-        tableRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+        bottomRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
     }
 
     return (
@@ -35,7 +39,7 @@ function Messages() {
                     ))}
                 </div>
             )}
-            <div ref={tableRef} />
+            <ScrollBottom ref={bottomRef} />
         </Container>
     );
 }
@@ -47,4 +51,7 @@ const Container = styled.div`
     height: calc(100% - 160px);
     overflow: scroll;
     overflow-x: hidden;
+`;
+const ScrollBottom = styled.div`
+    height: 65px;
 `;

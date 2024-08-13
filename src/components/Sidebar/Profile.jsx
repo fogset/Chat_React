@@ -6,7 +6,6 @@ import { SlClose } from "react-icons/sl";
 import { FaCamera } from "react-icons/fa6";
 import { updateUserProfile } from "../../Firebase/Update";
 import { uploadImage } from "../../Firebase/upload";
-import moment from "moment";
 
 function Profile({ setShowProfile }) {
     const [onEdit, setOnEdit] = useState(false);
